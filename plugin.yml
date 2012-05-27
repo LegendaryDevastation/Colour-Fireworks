@@ -1,0 +1,14 @@
+name:  ColourFireWorks
+main:  me.craftiii4.colourfireworks.colourfireworks
+version:  1.3.2
+website:  N/A
+author:  Craftiii4
+commands:
+  colourfireworks:
+    description: Command
+  colourfirework:
+    description: Command
+  colorfireworks:
+    description: Command
+  colorfirework:
+    description: Command

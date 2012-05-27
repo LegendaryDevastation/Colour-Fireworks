@@ -1,0 +1,10 @@
+Fireworks:
+  ItemIdNeededInHand: 288
+  DamageBlocks: true
+  Dye:
+    Drops: 24
+    SetAlight: false
+    CanBePickedUp: true
+  Pumpkin:
+    Drops: 32
+    Spiders: 4
