@@ -1,19 +1,17 @@
-//You may not copy the exact code!
-//You can use the code to understand how it works!
-//CopyWrited
-
-
-
 package me.craftiii4.colourfireworks;
 
 import java.util.Random;
 
+import me.craftiii4.colourfireworks.api.FindItemName;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 //import org.bukkit.Location;
 import org.bukkit.Material;
 //import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -22,37 +20,318 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 //import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
-
 
 public class colourfireworksPlayerListener implements Listener {
 
 	Random rand = new Random();
 	public static colourfireworks plugin;
-
-	//public colourfireworksPlayerListener(colourfireworks instance) {
-	//	plugin = instance;
-	//	plugin.getServer().getPluginManager().registerEvents(this, plugin);
-	//}
 	
+	public static Boolean AllowItem = null;
+
+	// public colourfireworksPlayerListener(colourfireworks instance) {
+	// plugin = instance;
+	// plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	// }
+
 	public colourfireworksPlayerListener(colourfireworks instance) {
 		plugin = instance;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
 	// When a player interacts
-	
 
-
-	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		Block block = event.getClickedBlock();
 		// Check if the interaction was a player right clicking a block
+		
+
+		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)
+				|| (event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+
+			if (block.getState() instanceof Sign) {
+				Sign sign = (Sign) block.getState();
+
+				if (sign.getLine(1).equalsIgnoreCase(
+						ChatColor.GOLD + "[Drop Party!]")) {
+
+					Location placeofsign = block.getLocation();
+
+					if (colourfireworksBlockListener.location != null) {
+
+						if (placeofsign.toString().equals(
+								colourfireworksBlockListener.location
+										.toString())) {
+
+							int iteminhandid = player.getItemInHand()
+									.getTypeId();
+							int iteminhandsubid = player.getItemInHand()
+									.getDurability();
+							int iteminhandammount = player.getItemInHand()
+									.getAmount();
+
+							int type = iteminhandid;
+							int typesub = iteminhandsubid;
+							int howmany = iteminhandammount;
+
+							boolean correctammount = false;
+							boolean alreadlydone = false;
+
+							if (plugin.getdroppartyConfig()
+									.getStringList("DropParty.BlockItemsId")
+									.contains("" + type)) {
+								alreadlydone = true;
+								correctammount = false;
+								player.sendMessage(ChatColor.RED
+										+ "Error, That item is blocked!");
+								event.setCancelled(true);
+							}
+							if (alreadlydone == false) {
+								if (player.getItemInHand().containsEnchantment(
+										Enchantment.ARROW_DAMAGE)
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.ARROW_FIRE))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.ARROW_INFINITE))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.ARROW_KNOCKBACK))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.DAMAGE_ALL))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.DAMAGE_ARTHROPODS))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.DAMAGE_UNDEAD))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.DIG_SPEED))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.DURABILITY))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.FIRE_ASPECT))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.KNOCKBACK))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.LOOT_BONUS_MOBS))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.OXYGEN))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.PROTECTION_EXPLOSIONS))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.PROTECTION_FALL))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.PROTECTION_FIRE))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.PROTECTION_PROJECTILE))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.SILK_TOUCH))
+										|| (player.getItemInHand()
+												.containsEnchantment(Enchantment.WATER_WORKER))) {
+									alreadlydone = true;
+									correctammount = false;
+									player.sendMessage(ChatColor.RED
+											+ "Sorry, Enchantments are not currently supported!");
+									event.setCancelled(true);
+								}
+							}
+							if (alreadlydone == false) {
+								if (iteminhandammount > 6) {
+									alreadlydone = true;
+									if (event.getAction().equals(
+											Action.RIGHT_CLICK_BLOCK)) {
+										howmany = 6;
+										correctammount = true;
+										// player.getItemInHand()
+										// .setAmount(
+										// player.getItemInHand()
+										// .getAmount() - 6);
+									}
+									if (event.getAction().equals(
+											Action.LEFT_CLICK_BLOCK)) {
+										howmany = 1;
+										correctammount = true;
+										// player.getItemInHand()
+										// .setAmount(
+										// player.getItemInHand()
+										// .getAmount() - 1);
+									}
+
+								}
+							}
+
+							if (alreadlydone == false) {
+								if (iteminhandammount < 6) {
+									if (iteminhandammount > 1) {
+										alreadlydone = true;
+										if (event.getAction().equals(
+												Action.RIGHT_CLICK_BLOCK)) {
+											howmany = 0;
+											correctammount = false;
+											player.sendMessage(ChatColor.RED
+													+ "Error, You need to be holding 6 of that item!");
+											event.setCancelled(true);
+										}
+										if (event.getAction().equals(
+												Action.LEFT_CLICK_BLOCK)) {
+											howmany = 1;
+											correctammount = true;
+											// player.getItemInHand().setAmount(
+											// player.getItemInHand()
+											// .getAmount() - 1);
+										}
+
+									}
+
+								}
+							}
+
+							if (alreadlydone == false) {
+								if (iteminhandammount == 1) {
+
+									alreadlydone = true;
+									if (event.getAction().equals(
+											Action.RIGHT_CLICK_BLOCK)) {
+										howmany = 0;
+										correctammount = false;
+										player.sendMessage(ChatColor.RED
+												+ "Error, You need to be holding 6 of that item!");
+										event.setCancelled(true);
+									}
+									if (event.getAction().equals(
+											Action.LEFT_CLICK_BLOCK)) {
+										howmany = 1;
+										correctammount = true;
+										// ItemStack test = new ItemStack(type,
+										// howmany);
+										// test.setDurability((short) typesub);
+										// player.getInventory().removeItem(test);
+									}
+
+								}
+
+							}
+
+							if (alreadlydone == false) {
+								if (iteminhandammount == 6) {
+
+									alreadlydone = true;
+									if (event.getAction().equals(
+											Action.RIGHT_CLICK_BLOCK)) {
+										howmany = 6;
+										correctammount = true;
+										// ItemStack test = new ItemStack(type,
+										// howmany);
+										// test.setDurability((short) typesub);
+										// player.getInventory().removeItem(test);
+									}
+									if (event.getAction().equals(
+											Action.LEFT_CLICK_BLOCK)) {
+										howmany = 1;
+										correctammount = true;
+										// player.getItemInHand().setAmount(
+										// player.getItemInHand()
+										// .getAmount() - 1);
+									}
+
+								}
+
+							}
+							if (correctammount == false) {
+								if (colourfireworks.Max.containsKey("insofar") == false) {
+									colourfireworks.Max.put("insofar", 0);
+								}
+
+								int insofar = colourfireworks.Max
+										.get("insofar") + howmany;
+								int maxallowed = colourfireworks.Max.get("Max");
+
+								if (insofar > maxallowed) {
+									correctammount = false;
+									player.sendMessage(ChatColor.RED
+											+ "Error, That would go over the max allowed!");
+									event.setCancelled(true);
+								}
+							}
+
+							if (correctammount == true) {
+
+								if (colourfireworks.HowManyItemsInTotal
+										.containsKey("total") == false) {
+									colourfireworks.HowManyItemsInTotal.put(
+											"total", 0);
+								}
+
+								int slot = colourfireworks.HowManyItemsInTotal
+										.get("total");
+
+								if (type != 0) {
+
+									slot = slot + 1;
+
+									ItemStack test = new ItemStack(type,
+											howmany);
+									test.setDurability((short) typesub);
+
+									FindItemName.RunFindItemName(plugin,
+											player, player.getItemInHand()
+													.getType().toString(),
+											type, typesub, howmany);
+
+									player.getInventory().removeItem(test);
+									player.updateInventory();
+
+									colourfireworks.WhatIsSlotItemsID.put(slot,
+											type);
+									colourfireworks.WhatIsSlotItemsSUBID.put(
+											slot, typesub);
+									colourfireworks.HowManySlotItems.put(slot,
+											howmany);
+
+									colourfireworks.HowManyItemsInTotal.put(
+											"total", slot);
+									
+									int insofar = colourfireworks.Max
+											.get("insofar") + howmany;
+									colourfireworks.Max.put("insofar", insofar);
+									
+
+									event.setCancelled(true);
+
+								} else {
+
+									player.sendMessage(ChatColor.RED
+											+ "Error, You must have an item in your hand!");
+
+								}
+
+							}
+
+						} else {
+							player.sendMessage(ChatColor.RED
+									+ "An error occured! Sign not found!");
+							block.setType(Material.AIR);
+						}
+
+					} else {
+						player.sendMessage(ChatColor.RED
+								+ "An error occured! No DP currently active!");
+						block.setType(Material.AIR);
+
+					}
+				}
+
+			}
+
+		}
+
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
 			// Check if the item the player is holding is equals to the ID
@@ -67,9 +346,9 @@ public class colourfireworksPlayerListener implements Listener {
 
 				fireworkheight = plugin.getConfig().getDouble(
 						"Fireworks.Height");
-				
+
 				Double expfireworkheight;
-				
+
 				expfireworkheight = plugin.getConfig().getDouble(
 						"Fireworks.Exp.Height");
 
@@ -126,23 +405,22 @@ public class colourfireworksPlayerListener implements Listener {
 
 					custx = 1;
 
-					while (plugin.customConfig.contains(
-							"Custom.Firework" + custx + ".use") == true) {
-						if (plugin.customConfig.getBoolean(
-								"Custom.Firework" + custx + ".use") == true) {
+					while (plugin.customConfig.contains("Custom.Firework"
+							+ custx + ".use") == true) {
+						if (plugin.customConfig.getBoolean("Custom.Firework"
+								+ custx + ".use") == true) {
 
 							int customfirework;
-							customfirework = plugin.customConfig.getInt(
-									"Custom.Firework" + custx
+							customfirework = plugin.customConfig
+									.getInt("Custom.Firework" + custx
 											+ ".FireworkBlockID");
 
 							int customfireworkraw;
-							customfireworkraw = plugin.customConfig.getInt(
-									"Custom.Firework" + custx
+							customfireworkraw = plugin.customConfig
+									.getInt("Custom.Firework" + custx
 											+ ".FireworkBlockID-Raw-Data");
 
 							if (event.getClickedBlock().getTypeId() == customfirework) {
-								
 
 								int correctraw;
 								correctraw = 0;
@@ -195,13 +473,18 @@ public class colourfireworksPlayerListener implements Listener {
 														.hasPermission("colourfirework.limited.custom"
 																+ custx))) {
 											// If yes, say:
-											if (!plugin.customConfig.getString("Custom.Firework" + custx + ".LaunchMessage").equals("")) {
-												
-												String custommessage = plugin.customConfig.getString("Custom.Firework" + custx + ".LaunchMessage");
-												
-												
-												
-												player.sendMessage(ChatColor.GOLD + custommessage);
+											if (!plugin.customConfig.getString(
+													"Custom.Firework" + custx
+															+ ".LaunchMessage")
+													.equals("")) {
+
+												String custommessage = plugin.customConfig
+														.getString("Custom.Firework"
+																+ custx
+																+ ".LaunchMessage");
+
+												player.sendMessage(ChatColor.GOLD
+														+ custommessage);
 											}
 											// Check if player has unlimited or
 											// is an OP
@@ -258,8 +541,7 @@ public class colourfireworksPlayerListener implements Listener {
 											// the
 											// listeners to detect which fire
 											// work went off
-											firework.setFireTicks(plugin
-													.customConfig
+											firework.setFireTicks(plugin.customConfig
 													.getInt("Custom.Firework"
 															+ custx
 															+ ".fireticks"));
@@ -358,7 +640,7 @@ public class colourfireworksPlayerListener implements Listener {
 						}
 					}
 				}
-				
+
 				if (event.getClickedBlock().getTypeId() == 20) {
 
 					int build2;
@@ -444,7 +726,6 @@ public class colourfireworksPlayerListener implements Listener {
 						}
 					}
 				}
-
 
 				if (event.getClickedBlock().getTypeId() == 86) {
 
@@ -1216,18 +1497,15 @@ public class colourfireworksPlayerListener implements Listener {
 			}
 		}
 	}
+
 	@EventHandler
 	public void onPlayerPickupItem(PlayerPickupItemEvent event) {
 		Item item = event.getItem();
 
-				if (item.getTicksLived() > 999999998) {
-					item.remove();
-					event.setCancelled(true);
-				}
+		if (item.getTicksLived() > 999999998) {
+			item.remove();
+			event.setCancelled(true);
+		}
 	}
-	
-	
-
 
 }
-

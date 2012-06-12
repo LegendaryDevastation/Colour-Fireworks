@@ -1,7 +1,3 @@
-//You may not copy the exact code!
-//You can use the code to understand how it works!
-//CopyWrited
-
 
 
 package me.craftiii4.colourfireworks;
@@ -18,7 +14,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -1351,12 +1346,68 @@ public class colourfireworksEntityListener implements Listener {
 				}
 			}
 			
-			if (block.getFireTicks() == 75) {
+			if (block.getFireTicks() == 72) {
+
+				int slot = 0;
+
+				int other = colourfireworks.HowManyItemsInTotal.get("total");
+
+				while (other > slot) {
+
+					slot++;
+					
+					int itemid;
+					int itemidsub;
+					int itemammount;
+
+					itemid = colourfireworks.WhatIsSlotItemsID.get(slot);
+
+					itemidsub = colourfireworks.WhatIsSlotItemsSUBID.get(slot);
+					
+					itemammount = colourfireworks.HowManySlotItems.get(slot);
+					
+					if (itemid == 0) {
+						//ignore
+					} else {
+						
+						int howmany = 0;
+						while (itemammount > howmany) {
+							double r1;
+							double r2;
+							double r3;
+							r1 = rand.nextDouble();
+							r2 = rand.nextDouble();
+							r3 = rand.nextDouble();
+							r1 = (r1 * 10) - 5;
+							r1 = (r1 / 10);
+							r2 = (r2 * 10) - 5;
+							r2 = (r2 / 10);
+							
+							r3 = (r3 * 4) - 4;
+							r3 = (r3 / 10);
+							ItemStack itemid2 = new ItemStack(itemid,
+									1);
+							itemid2.setDurability((short) itemidsub);
+							block.getWorld()
+							.dropItemNaturally(block.getLocation(), itemid2)
+							.setVelocity(new Vector(r1, r3, r2));
+							howmany++;
+							
+						}
+						
+					}
+					
+					
+				}
 				
-				
-				
+				colourfireworks.HowManyItemsInTotal.clear();
+				colourfireworks.HowManySlotItems.clear();
+				colourfireworks.WhatIsSlotItemsID.clear();
+				colourfireworks.WhatIsSlotItemsSUBID.clear();
+				colourfireworks.Max.put("insofar", 0);
 				
 			}
+			
 			
 			if (block.getFireTicks() == 83) {
 				

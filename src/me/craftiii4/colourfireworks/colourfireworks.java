@@ -1,6 +1,3 @@
-//You may not copy the exact code!
-//You can use the code to understand how it works!
-//CopyWrited
 
 
 package me.craftiii4.colourfireworks;
@@ -9,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 import java.util.HashMap;
@@ -17,11 +15,11 @@ import java.util.logging.Logger;
 
 
 import net.milkbowl.vault.Vault;
-import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,7 +28,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -47,8 +44,12 @@ public class colourfireworks extends JavaPlugin {
 	public static HashMap<Player, ArrayList<Block>> colourfireworkusers = new HashMap<Player, ArrayList<Block>>();
 	
 	
-	public static HashMap<String, Boolean> droppartychestplace = new HashMap<String, Boolean>();
-	public static HashMap<Location, Boolean> droppartychestlocation = new HashMap<Location, Boolean>();
+	public static HashMap<Integer, Integer> WhatIsSlotItemsID = new HashMap<Integer, Integer>();
+	public static HashMap<Integer, Integer> WhatIsSlotItemsSUBID = new HashMap<Integer, Integer>();
+	public static HashMap<Integer, Integer> HowManySlotItems = new HashMap<Integer, Integer>();
+	public static HashMap<String, Integer> HowManyItemsInTotal = new HashMap<String, Integer>();
+	
+	public static HashMap<String, Integer> Max = new HashMap<String, Integer>();
 	
 	public static HashMap<String, Boolean> allreadyone = new HashMap<String, Boolean>();
 	
@@ -66,6 +67,41 @@ public class colourfireworks extends JavaPlugin {
 		
 		
 	}
+	
+	FileConfiguration dropparty = null;
+	private File droppartyFile = null;
+	
+	public void reloadDropPartyConfig() {
+	    if (droppartyFile == null) {
+	    	droppartyFile = new File(getDataFolder(), "DropParty.yml");
+	    }
+	    dropparty = YamlConfiguration.loadConfiguration(droppartyFile);
+	 
+	    // Look for defaults in the jar
+	    InputStream defConfigStream2 = getResource("DropParty.yml");
+	    if (defConfigStream2 != null) {
+	        YamlConfiguration defConfig2 = YamlConfiguration.loadConfiguration(defConfigStream2);
+	        dropparty.setDefaults(defConfig2);
+	    }
+	}
+	
+	public FileConfiguration getdroppartyConfig() {
+	    if (dropparty == null) {
+	    	reloadDropPartyConfig();
+	    }
+	    return dropparty;
+	}
+	
+	public void savedroppartyConfig() {
+	    if (dropparty == null || droppartyFile == null) {
+	    return;
+	    }
+	    try {
+	    	dropparty.save(droppartyFile);
+	    } catch (IOException ex) {
+	        Logger.getLogger(JavaPlugin.class.getName()).log(Level.SEVERE, "Could not save config to " + droppartyFile, ex);
+	    }
+	}
 
 	
 	
@@ -77,7 +113,7 @@ public class colourfireworks extends JavaPlugin {
 	    customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
 	 
 	    // Look for defaults in the jar
-	    InputStream defConfigStream = getResource("customConfig.yml");
+	    InputStream defConfigStream = getResource("CustomFireWorks.yml");
 	    if (defConfigStream != null) {
 	        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 	        customConfig.setDefaults(defConfig);
@@ -107,7 +143,9 @@ public class colourfireworks extends JavaPlugin {
 	public void onDisable() {
 		System.out.println("[ColourFireWorks] ColourFireWorks v"
 				+ getDescription().getVersion() + " disabled!");
-
+		
+		 saveCustomConfig();
+		 savedroppartyConfig();
 	}
 
 	@Override
@@ -148,6 +186,7 @@ public class colourfireworks extends JavaPlugin {
 	public void loadConfiguration() {
 		
 		getCustomConfig();
+		getdroppartyConfig();
 
 		String ItemIdNeededInHand = "Fireworks.ItemIdNeededInHand";
 		getConfig().addDefault(ItemIdNeededInHand, 288);
@@ -218,7 +257,59 @@ public class colourfireworks extends JavaPlugin {
 		getConfig().addDefault(custommsg01, true);
 		
 		String dropparty = "DropParty.Message.Radius";
-		getConfig().addDefault(dropparty, 50);
+		getdroppartyConfig().addDefault(dropparty, 50);
+	    String[] dplist = {"7", "8", "9", "10", "11", "26", "36", "55", "74", "75", "83", "115", "117", "118", "119", "120"};
+	    getdroppartyConfig().addDefault("DropParty.BlockItemsId", Arrays.asList(dplist));
+	    //String[] dplist2 = {"BEDROCK", "WATER", "STATIONARY_WATER", "LAVA", "STATIONARY_LAVA", "BED_BLOCK", "PISTON_MOVING_PIECE", "REDSTONE_WIRE", "74", "75", "83", "115", "117", "118", "119", "120"};
+	    //getdroppartyConfig().addDefault("DropParty.Items", Arrays.asList(dplist2));
+	    
+	    
+		String maxin = "DropParty.Max";
+		getdroppartyConfig().addDefault(maxin, 512);
+		
+		String lol = Material.DIAMOND_SWORD.toString();
+		
+		String diamondtime = "DropParty.Items.DIAMOND.AddedTime";
+		getdroppartyConfig().addDefault(diamondtime, 5);
+		String diamond1time = "DropParty.Items.DIAMOND_AXE.AddedTime";
+		getdroppartyConfig().addDefault(diamond1time, 8);
+		String diamond2time = "DropParty.Items.DIAMOND_HOE.AddedTime";
+		getdroppartyConfig().addDefault(diamond2time, 3);
+		String diamond3time = "DropParty.Items.DIAMOND_PICKAXE.AddedTime";
+		getdroppartyConfig().addDefault(diamond3time, 10);
+		String diamond4time = "DropParty.Items.DIAMOND_SPADE.AddedTime";
+		getdroppartyConfig().addDefault(diamond4time, 5);
+		String diamond5time = "DropParty.Items.DIAMOND_SWORD.AddedTime";
+		getdroppartyConfig().addDefault(diamond5time, 10);
+		
+		String goldtime = "DropParty.Items.GOLD.AddedTime";
+		getdroppartyConfig().addDefault(goldtime, 3);
+		String gold1time = "DropParty.Items.GOLD_AXE.AddedTime";
+		getdroppartyConfig().addDefault(gold1time, 4);
+		String gold2time = "DropParty.Items.GOLD_HOE.AddedTime";
+		getdroppartyConfig().addDefault(gold2time, 1);
+		String gold3time = "DropParty.Items.GOLD_PICKAXE.AddedTime";
+		getdroppartyConfig().addDefault(gold3time, 5);
+		String gold4time = "DropParty.Items.GOLD_SPADE.AddedTime";
+		getdroppartyConfig().addDefault(gold4time, 2);
+		String gold5time = "DropParty.Items.GOLD_SWORD.AddedTime";
+		getdroppartyConfig().addDefault(gold5time, 5);
+		
+		String irontime = "DropParty.Items.IRON.AddedTime";
+		getdroppartyConfig().addDefault(irontime, 4);
+		String iron1time = "DropParty.Items.IRON_AXE.AddedTime";
+		getdroppartyConfig().addDefault(iron1time, 6);
+		String iron2time = "DropParty.Items.IRON_HOE.AddedTime";
+		getdroppartyConfig().addDefault(iron2time, 2);
+		String iron3time = "DropParty.Items.IRON_PICKAXE.AddedTime";
+		getdroppartyConfig().addDefault(iron3time, 7);
+		String iron4time = "DropParty.Items.IRON_SPADE.AddedTime";
+		getdroppartyConfig().addDefault(iron4time, 3);
+		String iron5time = "DropParty.Items.IRON_SWORD.AddedTime";
+		getdroppartyConfig().addDefault(iron5time, 7);
+		
+		
+		colourfireworks.Max.put("Max", getdroppartyConfig().getInt("DropParty.Max"));
 		
 		int tickcheck;
 		tickcheck = getConfig().getInt("Fireworks.Dye.Remove.Ticks");
@@ -1019,6 +1110,8 @@ public class colourfireworks extends JavaPlugin {
 		saveConfig();
 		this.getCustomConfig().options().copyDefaults(true);		
 		saveCustomConfig();
+		this.getdroppartyConfig().options().copyDefaults(true);	
+		savedroppartyConfig();
 		System.out.println("[ColourFireWorks] Config Loaded");
 		}
 
@@ -1037,8 +1130,11 @@ public class colourfireworks extends JavaPlugin {
 				|| (commandName.equals("colourfirework")
 						|| (commandName.equals("colorfireworks")) || (commandName
 							.equals("colorfirework")))) {
+			
+			Boolean correct = false;
 
 			if (args.length == 0) {
+				correct = true;
 				sender.sendMessage(ChatColor.WHITE
 						+ "--------------------------------------------------");
 				sender.sendMessage(ChatColor.AQUA + "ColourFireWorks");
@@ -1055,7 +1151,7 @@ public class colourfireworks extends JavaPlugin {
 			}
 
 			if (args.length > 1) {
-
+				correct = true;
 				sender.sendMessage(ChatColor.WHITE
 						+ "--------------------------------------------------");
 				sender.sendMessage(ChatColor.GOLD + "ColourFireWorks");
@@ -1077,28 +1173,8 @@ public class colourfireworks extends JavaPlugin {
 				String reload;
 				reload = args[0];
 				
-				//if (reload.equalsIgnoreCase("dropparty") || (reload.equalsIgnoreCase("dp")||(reload.equalsIgnoreCase("drop")))) {
-					
-				//	if (player.hasPermission("colourfirework.dropparty") || (player.hasPermission("colourfirework.*")
-				//			|| (player
-				//					.isOp()))) {
-						
-				//		player.sendMessage(ChatColor.GREEN
-				//				+ "Please place a chest");
-						
-				//		colourfireworks.droppartychestplace.put(player.getName(), true);
-						
-						
-				//	} else {
-				//		player.sendMessage(ChatColor.RED
-				//				+ "You can not create drop partys!");
-				//	}
-					
-					
-				//}
-
 				if (reload.equalsIgnoreCase("reload")) {
-					
+					correct = true;
 					
 					
 
@@ -1117,6 +1193,8 @@ public class colourfireworks extends JavaPlugin {
 						int tickcheck;
 						tickcheck = getConfig().getInt("Fireworks.Dye.Remove.Ticks");
 						
+						colourfireworks.Max.put("Max", getdroppartyConfig().getInt("DropParty.Max"));
+						
 						if (tickcheck < 0) {						
 								System.out.println("[ColourFireWorks] Error, Remove Ticks Below 0, set to default");
 								getConfig().set("Fireworks.Dye.Remove.Ticks", 30);
@@ -1127,7 +1205,7 @@ public class colourfireworks extends JavaPlugin {
 							System.out.println("[ColourFireWorks] Error, Remove Ticks Above 600 (30 sec), set to default");
 							getConfig().set("Fireworks.Dye.Remove.Ticks", 30);
 						
-					}
+						}
 						
 						
 						int iteminhandcheck;
@@ -1915,6 +1993,8 @@ public class colourfireworks extends JavaPlugin {
 							saveConfig();
 							this.getCustomConfig().options().copyDefaults(true);		
 							saveCustomConfig();
+							this.getdroppartyConfig().options().copyDefaults(true);	
+							savedroppartyConfig();
 							player.sendMessage(ChatColor.GREEN
 									+ "ColourFireWorks Reloaded!");
 							System.out
@@ -1925,7 +2005,9 @@ public class colourfireworks extends JavaPlugin {
 						player.sendMessage(ChatColor.RED
 								+ "You do not have permission to do that!");
 					}
-				} else {
+				} 
+				
+				if (correct == false) {
 					sender.sendMessage(ChatColor.GREEN + "Did you mean"
 							+ ChatColor.BLUE + " '/colourfireworks reload'"
 							+ ChatColor.GREEN + "?");

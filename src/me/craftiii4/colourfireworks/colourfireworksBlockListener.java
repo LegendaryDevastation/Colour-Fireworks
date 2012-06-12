@@ -1,6 +1,3 @@
-//You may not copy the exact code!
-//You can use the code to understand how it works!
-//CopyWrited
 
 
 
@@ -25,9 +22,12 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -36,7 +36,7 @@ public class colourfireworksBlockListener implements Listener {
 	public static colourfireworks plugin;
 	
 
-	private static Location location = null;
+	public static Location location = null;
 	
 	public static ItemStack itemsindp = null;
 	
@@ -527,39 +527,641 @@ public class colourfireworksBlockListener implements Listener {
 
 		}
 	}
+
 	
+	public static int time = 60;
+	static int round1;
+	public static void startDropParty(final Player player) {
+		round1 = plugin.getServer().getScheduler()
+				.scheduleAsyncRepeatingTask(plugin, new Runnable() {
+					public void run() {
+						
+						if (time > 300) {
+							time = 300;
+						}
+						
+						if (time == 300) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "5 minutes left! - " + ChatColor.RED + "Max!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 240) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "4 minutes left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 180) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "3 minutes left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 120) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "2 minutes left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 90) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "90 Secounds left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 75) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "75 Secounds left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+						
+						if (time == 60) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "60 Secounds left!");
+
+								}
+
+								test01++;
+							}
+							
+						}
+
+						if (time == 45) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "45 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 30) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "30 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 15) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "15 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 10) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD
+													+ "10 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 5) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity)
+											.getPlayer()
+											.sendMessage(
+													ChatColor.GOLD
+															+ "5 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+						if (time == 4) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity)
+											.getPlayer()
+											.sendMessage(
+													ChatColor.GOLD
+															+ "4 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 3) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity)
+											.getPlayer()
+											.sendMessage(
+													ChatColor.GOLD
+															+ "3 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 2) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity)
+											.getPlayer()
+											.sendMessage(
+													ChatColor.GOLD
+															+ "2 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 1) {
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							Block block = location.getBlock();
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity)
+											.getPlayer()
+											.sendMessage(
+													ChatColor.GOLD
+															+ "1 Secounds left!");
+
+								}
+
+								test01++;
+							}
+
+						}
+
+						if (time == 0) {
+							Block block = location.getBlock();
+
+							int radius = plugin.getdroppartyConfig().getInt(
+									"DropParty.Message.Radius");
+							
+
+							Entity chicken = block.getWorld().spawnCreature(
+									block.getLocation(), EntityType.CHICKEN);
+							List<Entity> list = chicken.getNearbyEntities(
+									radius, radius, radius);
+							chicken.remove();
+
+							int test01 = 0;
+							int test02 = list.size();
+
+							while (test02 > test01) {
+
+								Entity entity = list.get(test01);
+								if (entity instanceof Player) {
+									((Player) entity).getPlayer().sendMessage(
+											ChatColor.GOLD + "Drop Party Going up!");
+
+								}
+
+								test01++;
+							}
+							if (block.getState() instanceof Sign) {
+
+
+								Double fireworkheight;
+
+								fireworkheight = plugin.getConfig().getDouble(
+										"Fireworks.Height");
+
+								TNTPrimed firework = block
+										.getLocation()
+										.getWorld()
+										.spawn(block.getLocation(),
+												TNTPrimed.class);
+								// Shoot the TNT up into the air
+								firework.setVelocity(new Vector((rand2
+										.nextFloat() - 0.5f) / 3,
+										fireworkheight,
+										(rand2.nextFloat() - 0.5f) / 3));
+								// Set the fuse ticks of the TNT to 35
+								firework.setFuseTicks(35);
+								// Set the fire ticks to 101, this also allows
+								// the
+								// listeners to detect which fire work went off
+								firework.setFireTicks(72);
+
+								block.setTypeId(0);
+
+
+							}
+
+							stopDropParty();
+
+						}
+
+						time--;
+
+					}
+
+				}, 0L, 20L);
+	}
+	
+	
+
+	public static void stopDropParty() {
+		plugin.getServer().getScheduler().cancelTask(round1);
+		Bukkit.getScheduler().cancelTask(round1);
+		time = 60;
+		location = null;
+		colourfireworks.allreadyone.clear();
+	}
+
 	@EventHandler
-	public void onBlockPlace(BlockPlaceEvent event) {
+	public void onBlockBreak(BlockBreakEvent event) {
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
+		
+		if (block.getState() instanceof Sign) {
+			Sign sign = (Sign) block.getState();
 
-		if (!event.isCancelled()) {
+			if (sign.getLine(1).equalsIgnoreCase(
+					ChatColor.GOLD + "[Drop Party!]")) {
 
-			if (block.getState() instanceof Chest) {
+				Location placeofsign = block.getLocation();
+
+				if (colourfireworksBlockListener.location != null) {
+
+					if (placeofsign.toString().equals(
+							colourfireworksBlockListener.location
+									.toString())) {
+						
+						event.setCancelled(true);
+						player.sendMessage(ChatColor.RED + "Can not remove that DP sign!");
+						sign.setLine(1, ChatColor.GOLD + "[Drop Party!]");
+						sign.setLine(2, "[R Click = 1]");
+						sign.setLine(3, "[L Click = 6]");
+						sign.update();
+						
+						
+					}
+				}
+			}
+		}
+		
+	}
+
+
+	@EventHandler
+	public void onSignChange(SignChangeEvent event) {
+		Block block = event.getBlock();
+		Player player = event.getPlayer();
+		ItemStack sign = new ItemStack(Material.SIGN, 1);
+
+		int signcorrect;
+
+		signcorrect = 0;
+		
+		if (event.getLine(1).equalsIgnoreCase("[DP]")
+				|| (event.getLine(1).equalsIgnoreCase("[D P]")|| (event.getLine(1).contains("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[DropParty]")))))) {
+			if (player.hasPermission("colourfireworks.dropparty.*")
+					|| (player.hasPermission("colourfirework.*") || (player.hasPermission("colourfirework.dropparty.create") || player
+							.isOp()))) {
 				
-				if (colourfireworks.droppartychestplace.containsKey(player.getName())) {
-
+				event.setLine(1, ChatColor.GOLD + "[Drop Party!]");
+				event.setLine(2, "[R Click = 1]");
+				event.setLine(3, "[L Click = 6]");
+				
 				if (!colourfireworks.allreadyone.containsKey("On")) {
-					Chest chest = (Chest) block.getState();
-					Location placeofchest = chest.getLocation();
+					Sign sign2 = (Sign) block.getState();
+					Location placeofchest = sign2.getLocation();
 
 					player.sendMessage(ChatColor.GOLD
-							+ "DropParty Chest Placed");
+							+ "DropParty Started");
 					
 					location = placeofchest;
 					
-					
-
-					colourfireworks.droppartychestlocation.put(placeofchest,
-							true);
-					colourfireworks.droppartychestplace
-							.remove(player.getName());
 					colourfireworks.allreadyone.put("On", true);
-
+					
+					int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
 					Entity chicken = block.getWorld().spawnCreature(
 							block.getLocation(), EntityType.CHICKEN);
 					
-					int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
+
 					
 					List<Entity> list = chicken.getNearbyEntities(radius,radius,radius);
 					chicken.remove();
@@ -568,6 +1170,12 @@ public class colourfireworksBlockListener implements Listener {
 
 					int test01 = 0;
 					int test02 = list.size();
+					
+					colourfireworks.HowManyItemsInTotal.clear();
+					colourfireworks.HowManySlotItems.clear();
+					colourfireworks.WhatIsSlotItemsID.clear();
+					colourfireworks.WhatIsSlotItemsSUBID.clear();
+					colourfireworks.Max.put("insofar", 0);
 					
 					
 
@@ -603,389 +1211,21 @@ public class colourfireworksBlockListener implements Listener {
 				} else {
 					player.sendMessage(ChatColor.RED
 							+ "Alreadly a drop party in progress!");
+					block.setType(Material.AIR);
+					block.getWorld().dropItemNaturally(block.getLocation(), sign);
 				}
 				
-				}
-
+				
+				
+			} else {
+				block.setType(Material.AIR);
+				block.getWorld().dropItemNaturally(block.getLocation(), sign);
+				player.sendMessage(ChatColor.RED
+						+ "You do not have permission to create a drop party sign!");
 			}
+			
+			
 		}
-
-	}
-	
-	private static int time = 60;
-	static int round1;
-	public static void startDropParty(final Player player) {
-		round1 = plugin.getServer().getScheduler()
-				.scheduleAsyncRepeatingTask(plugin, new Runnable() {
-					public void run() {				
-
-						if (time == 45) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "45 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-
-						if (time == 30) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "30 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 15) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "15 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 10) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "10 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 5) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "5 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						if (time == 4) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "4 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 3) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "3 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 2) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "2 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 1) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "1 Secounds left!");
-
-								}
-
-								test01++;
-							}
-
-						}
-						
-						if (time == 0) {
-							int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-							Block block = location.getBlock();
-
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							List<Entity> list = chicken.getNearbyEntities(radius,
-									radius, radius);
-							chicken.remove();
-
-							int test01 = 0;
-							int test02 = list.size();
-
-							while (test02 > test01) {
-
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "Chest Going up!");
-
-								}
-
-								test01++;
-							}
-							
-							
-							if (block.getState() instanceof Chest) {
-
-								if (block.getState() instanceof DoubleChest) {
-									
-									int radius1 = plugin.getConfig().getInt("DropParty.Message.Radius");
-									Block block1 = location.getBlock();
-
-									Entity chicken1 = block1.getWorld().spawnCreature(
-											block1.getLocation(), EntityType.CHICKEN);
-									List<Entity> list1 = chicken1.getNearbyEntities(radius1,
-											radius1, radius1);
-									chicken1.remove();
-
-									int test011 = 0;
-									int test021 = list1.size();
-
-									while (test021 > test011) {
-
-										Entity entity = list1.get(test011);
-										if (entity instanceof Player) {
-											((Player) entity).getPlayer().sendMessage(
-													ChatColor.RED
-															+ "Failed! Double chest not supported");
-
-										}
-
-										test011++;
-									}
-								} else {
-									Chest chest = (Chest) block.getState();
-
-									Double fireworkheight;
-
-									fireworkheight = plugin.getConfig().getDouble(
-											"Fireworks.Height");
-									
-									TNTPrimed firework = block
-											.getLocation()
-											.getWorld()
-											.spawn(block
-													.getLocation(), TNTPrimed.class);
-									// Shoot the TNT up into the air
-									firework.setVelocity(new Vector(
-											(rand2.nextFloat() - 0.5f) / 3,
-											fireworkheight,
-											(rand2.nextFloat() - 0.5f) / 3));
-									// Set the fuse ticks of the TNT to 35
-									firework.setFuseTicks(35);
-									// Set the fire ticks to 101, this also allows the
-									// listeners to detect which fire work went off
-									firework.setFireTicks(75);
-									
-								}
-								
-								
-							}
-							
-							
-							
-							stopDropParty();
-
-						}
-						
-						time--;
-
-					}
-
-				}, 0L, 20L);
-	}
-
-	public static void stopDropParty() {
-		plugin.getServer().getScheduler().cancelTask(round1);
-		Bukkit.getScheduler().cancelTask(round1);
-		time = 60;
-		location = null;
-		colourfireworks.allreadyone.clear();
-	}
-
-
-
-	@EventHandler
-	public void onSignChange(SignChangeEvent event) {
-		Block block = event.getBlock();
-		Player player = event.getPlayer();
-		ItemStack sign = new ItemStack(Material.SIGN, 1);
-
-		int signcorrect;
-
-		signcorrect = 0;
 
 		if (event.getLine(1).equalsIgnoreCase("[FireWork]")
 				|| (event.getLine(1).equalsIgnoreCase("[Fire Work]"))) {
