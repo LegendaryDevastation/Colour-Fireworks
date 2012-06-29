@@ -7,9 +7,8 @@ import me.craftiii4.colourfireworks.colourfireworksBlockListener;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 
@@ -23,16 +22,16 @@ public class FindItemName {
 
 		int radius = plugin.getdroppartyConfig().getInt(
 				"DropParty.Message.Radius");
+		
 
-		Block block = colourfireworksBlockListener.location.getBlock();
+		//Block block = colourfireworksBlockListener.location.getBlock();
 
-		Entity chicken = block.getWorld().spawnCreature(block.getLocation(),
-				EntityType.CHICKEN);
-		List<Entity> list = chicken.getNearbyEntities(radius, radius, radius);
-		chicken.remove();
+		//Entity chicken = block.getWorld().spawnCreature(block.getLocation(), EntityType.CHICKEN);
+		List<Entity> list = player.getNearbyEntities(radius, radius, radius);
+				
+		//chicken.remove();
 
 		String itemnamebackup23 = null;
-
 
 		int test01 = 0;
 		int test02 = list.size();
@@ -588,7 +587,7 @@ public class FindItemName {
 			}
 			if (isapotion == false) {
 				itemnamebackup23 = "Unknown Potion";
-			}			
+			}
 		}
 
 		if (itemid == 383) {
@@ -712,7 +711,8 @@ public class FindItemName {
 					"DropParty.Items." + itemname + ".AddedTime")) {
 
 				int timetoadd = plugin.getdroppartyConfig().getInt(
-						"DropParty.Items." + itemname + ".AddedTime") * howmany2;
+						"DropParty.Items." + itemname + ".AddedTime")
+						* howmany2;
 
 				colourfireworksBlockListener.time = colourfireworksBlockListener.time
 						+ timetoadd;
@@ -741,13 +741,12 @@ public class FindItemName {
 					.replace("6", "").replace("7", "").replace("8", "")
 					.replace("9", "").toUpperCase();
 
-			player.sendMessage(itemname2);
-
 			if (plugin.getdroppartyConfig().contains(
 					"DropParty.Items." + itemname2 + ".AddedTime")) {
 
 				int timetoadd = plugin.getdroppartyConfig().getInt(
-						"DropParty.Items." + itemname2 + ".AddedTime") * howmany2;
+						"DropParty.Items." + itemname2 + ".AddedTime")
+						* howmany2;
 
 				colourfireworksBlockListener.time = colourfireworksBlockListener.time
 						+ timetoadd;
@@ -776,7 +775,8 @@ public class FindItemName {
 
 										int timetoadd = plugin
 												.getdroppartyConfig()
-												.getInt("DropParty.Items.POTION.AddedTime") * howmany2;
+												.getInt("DropParty.Items.POTION.AddedTime")
+												* howmany2;
 
 										colourfireworksBlockListener.time = colourfireworksBlockListener.time
 												+ timetoadd;
@@ -800,36 +800,30 @@ public class FindItemName {
 					}
 
 				}
-				
+
 				if (itemname2.contains("SPLASH")) {
-					
+
 					if (plugin.getdroppartyConfig().contains(
 							"DropParty.Items.SPLASH.AddedTime")) {
 
 						other = true;
 
-						int timetoadd = plugin
-								.getdroppartyConfig()
-								.getInt("DropParty.Items.SPLASH.AddedTime") * howmany2;
+						int timetoadd = plugin.getdroppartyConfig().getInt(
+								"DropParty.Items.SPLASH.AddedTime")
+								* howmany2;
 
 						colourfireworksBlockListener.time = colourfireworksBlockListener.time
 								+ timetoadd;
 
-						message = ChatColor.GOLD
-								+ player.getName()
-								+ ChatColor.GRAY
-								+ " just put in "
-								+ ChatColor.LIGHT_PURPLE
-								+ howmany2 + " "
-								+ ChatColor.AQUA
-								+ itemnamebackup23
+						message = ChatColor.GOLD + player.getName()
+								+ ChatColor.GRAY + " just put in "
+								+ ChatColor.LIGHT_PURPLE + howmany2 + " "
+								+ ChatColor.AQUA + itemnamebackup23
 								+ ChatColor.GREEN + " + "
-								+ ChatColor.LIGHT_PURPLE
-								+ timetoadd + ChatColor.GRAY
-								+ " sec";
+								+ ChatColor.LIGHT_PURPLE + timetoadd
+								+ ChatColor.GRAY + " sec";
 					}
-					
-					
+
 				}
 
 				if (itemname2.contains("SPAWNER_EGG")) {
@@ -840,7 +834,8 @@ public class FindItemName {
 						other = true;
 
 						int timetoadd = plugin.getdroppartyConfig().getInt(
-								"DropParty.Items.SPAWNER_EGG.AddedTime") * howmany2;
+								"DropParty.Items.SPAWNER_EGG.AddedTime")
+								* howmany2;
 
 						colourfireworksBlockListener.time = colourfireworksBlockListener.time
 								+ timetoadd;
@@ -865,7 +860,8 @@ public class FindItemName {
 						other = true;
 
 						int timetoadd = plugin.getdroppartyConfig().getInt(
-								"DropParty.Items.WOOL.AddedTime")* howmany2;
+								"DropParty.Items.WOOL.AddedTime")
+								* howmany2;
 
 						colourfireworksBlockListener.time = colourfireworksBlockListener.time
 								+ timetoadd;
@@ -892,7 +888,8 @@ public class FindItemName {
 						other = true;
 
 						int timetoadd = plugin.getdroppartyConfig().getInt(
-								"DropParty.Items.DYE.AddedTime") * howmany2;
+								"DropParty.Items.DYE.AddedTime")
+								* howmany2;
 
 						colourfireworksBlockListener.time = colourfireworksBlockListener.time
 								+ timetoadd;
@@ -920,17 +917,255 @@ public class FindItemName {
 
 			}
 
-		}
+			if (manualnameset == true) {
 
-		while (test02 > test01) {
+				if (plugin.getdroppartyConfig().contains(
+						"DropParty.Items." + itemname2 + ".Message")) {
 
-			Entity entity = list.get(test01);
-			if (entity instanceof Player) {
-				((Player) entity).getPlayer().sendMessage(message);
+					if (plugin.getdroppartyConfig().getBoolean(
+							"DropParty.Items." + itemname2 + ".Message") == false) {
+
+						message = null;
+
+					}
+
+				}
 
 			}
 
-			test01++;
+		}
+
+		if (manualnameset == false) {
+
+			if (plugin.getdroppartyConfig().contains(
+					"DropParty.Items." + itemname + ".Message")) {
+
+				if (plugin.getdroppartyConfig().getBoolean(
+						"DropParty.Items." + itemname + ".Message") == false) {
+
+					message = null;
+
+				}
+
+			}
+
+		}
+		
+		if (message != null) {
+			
+			String enchantmentstoadd = "";
+			
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.ARROW_DAMAGE)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.ARROW_DAMAGE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arrow Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.ARROW_FIRE)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.ARROW_FIRE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire Arrows " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.ARROW_INFINITE)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.ARROW_INFINITE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Infinite Arrows " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.ARROW_KNOCKBACK)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.ARROW_KNOCKBACK);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arrow Knockback " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.DAMAGE_ALL)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.DAMAGE_ALL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "More Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.DAMAGE_ARTHROPODS)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.DAMAGE_ARTHROPODS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arthropods " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.DAMAGE_UNDEAD)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.DAMAGE_UNDEAD);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Undead Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.DIG_SPEED)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.DIG_SPEED);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Dig Speed " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.DURABILITY)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.DURABILITY);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Durability " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.FIRE_ASPECT)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.FIRE_ASPECT);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.KNOCKBACK)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.KNOCKBACK);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Knockback " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.LOOT_BONUS_BLOCKS)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.LOOT_BONUS_BLOCKS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Block Loot " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.LOOT_BONUS_MOBS)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.LOOT_BONUS_MOBS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Mob Loot " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.OXYGEN)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.OXYGEN);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Oxygen " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.PROTECTION_ENVIRONMENTAL)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.PROTECTION_ENVIRONMENTAL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Environment Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.PROTECTION_EXPLOSIONS)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.PROTECTION_EXPLOSIONS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Explosion Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.PROTECTION_FALL)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.PROTECTION_FALL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fall Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.PROTECTION_FIRE)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.PROTECTION_FIRE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player
+					.getItemInHand()
+					.containsEnchantment(
+							Enchantment.PROTECTION_PROJECTILE)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.PROTECTION_PROJECTILE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Projectile Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.SILK_TOUCH)) {
+				int level = player.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.SILK_TOUCH);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Silk Touch " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			if (player.getItemInHand()
+					.containsEnchantment(
+							Enchantment.WATER_WORKER)) {
+				int level = player
+						.getItemInHand()
+						.getEnchantmentLevel(
+								Enchantment.WATER_WORKER);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Water Worker " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			}
+			
+			
+			
+						
+			String newmessage = message.replace(player.getName(), "").replace("just", "You");
+			
+			player.sendMessage(newmessage + enchantmentstoadd);
+			
+			while (test02 > test01) {
+
+				Entity entity = list.get(test01);
+				if (entity instanceof Player) {
+					((Player) entity).getPlayer().sendMessage(message + enchantmentstoadd);
+
+				}
+
+				test01++;
+			}
+
 		}
 
 	}

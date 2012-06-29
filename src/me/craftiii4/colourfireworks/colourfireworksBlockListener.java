@@ -12,8 +12,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -24,10 +22,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -92,11 +86,17 @@ public class colourfireworksBlockListener implements Listener {
 					if (signwhite.getLine(1).equalsIgnoreCase("[FireWork]")) {
 						Double fireworkheight;
 						fireworkheight = plugin.getConfig().getDouble(
-								"Fireworks.Height");
+								"Fireworks.Wool.Height");
 						Double expfireworkheight;
-						
 						expfireworkheight = plugin.getConfig().getDouble(
 								"Fireworks.Exp.Height");
+						Double fireworkpumpkinheight;
+						fireworkpumpkinheight = plugin.getConfig().getDouble(
+								"Fireworks.Pumpkin.Height");
+						Double fireworksnowheight;
+						fireworksnowheight = plugin.getConfig().getDouble(
+								"Fireworks.Snow.Height");
+						
 						if (block.isBlockPowered() == false) {
 							if (signwhite.getLine(2)
 									.equalsIgnoreCase("[White]")) {
@@ -444,7 +444,7 @@ public class colourfireworksBlockListener implements Listener {
 														TNTPrimed.class);
 										pumpkinfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
-												fireworkheight,
+												fireworkpumpkinheight,
 												(rand.nextFloat() - 0.5f) / 3));
 										pumpkinfirework.setFuseTicks(35);
 										pumpkinfirework.setFireTicks(101);
@@ -465,7 +465,7 @@ public class colourfireworksBlockListener implements Listener {
 														TNTPrimed.class);
 										blackfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
-												fireworkheight,
+												fireworksnowheight,
 												(rand.nextFloat() - 0.5f) / 3));
 										blackfirework.setFuseTicks(35);
 										blackfirework.setFireTicks(102);
@@ -507,9 +507,15 @@ public class colourfireworksBlockListener implements Listener {
 												.getWorld()
 												.spawn(block.getLocation(),
 														TNTPrimed.class);
+										
+										Double fireworkcustomheight;
+										fireworkcustomheight = plugin.getCustomConfig().getDouble(
+												"Custom.Firework" + firen + ".Height");
+										
+										
 										custfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
-												fireworkheight,
+												fireworkcustomheight,
 												(rand.nextFloat() - 0.5f) / 3));
 										custfirework.setFuseTicks(35);
 										custfirework.setFireTicks(plugin.customConfig.getInt("Custom.Firework" + firen + ".fireticks"));
@@ -547,6 +553,16 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -576,6 +592,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -605,6 +629,15 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -634,6 +667,16 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -663,6 +706,15 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -692,6 +744,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -721,6 +781,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -750,6 +818,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -779,6 +855,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -808,6 +892,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -837,6 +929,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -860,12 +960,24 @@ public class colourfireworksBlockListener implements Listener {
 						}
 
 						if (time == 5) {
+							
 							int radius = plugin.getdroppartyConfig().getInt(
 									"DropParty.Message.Radius");
 							Block block = location.getBlock();
+							
+							block.getWorld().setStorm(false);
+							block.getWorld().setWeatherDuration(0);
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -896,6 +1008,15 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -927,6 +1048,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -958,6 +1087,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -989,6 +1126,14 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
@@ -1022,9 +1167,19 @@ public class colourfireworksBlockListener implements Listener {
 
 							Entity chicken = block.getWorld().spawnCreature(
 									block.getLocation(), EntityType.CHICKEN);
+							
+							int limit = 0;
+							while (chicken == null && limit < 5){
+								chicken = block.getWorld().spawnCreature(
+										block.getLocation(), EntityType.CHICKEN);
+								limit++;
+							}
+							
 							List<Entity> list = chicken.getNearbyEntities(
 									radius, radius, radius);
 							chicken.remove();
+							
+
 
 							int test01 = 0;
 							int test02 = list.size();
@@ -1068,10 +1223,27 @@ public class colourfireworksBlockListener implements Listener {
 								block.setTypeId(0);
 
 
+							} else {
+								while (test02 > test01) {
+
+									Entity entity = list.get(test01);
+									if (entity instanceof Player) {
+										((Player) entity).getPlayer().sendMessage(
+												ChatColor.GOLD + "Drop party cancled! - Sign was forced removed, world edit?");
+
+									}
+
+									test01++;
+								}
 							}
 
 							stopDropParty();
+							
 
+						}
+						
+						if (time <= 0) {
+							time = 1;
 						}
 
 						time--;
@@ -1089,6 +1261,19 @@ public class colourfireworksBlockListener implements Listener {
 		time = 60;
 		location = null;
 		colourfireworks.allreadyone.clear();
+	}
+	
+	public static void stopDropPartycomplete() {
+		plugin.getServer().getScheduler().cancelTask(round1);
+		Bukkit.getScheduler().cancelTask(round1);
+		time = 60;
+		location = null;
+		colourfireworks.allreadyone.clear();
+		colourfireworks.HowManyItemsInTotal.clear();
+		colourfireworks.HowManySlotItems.clear();
+		colourfireworks.WhatIsSlotItemsID.clear();
+		colourfireworks.WhatIsSlotItemsSUBID.clear();
+		colourfireworks.Max.put("insofar", 0);
 	}
 
 	@EventHandler
@@ -1113,8 +1298,7 @@ public class colourfireworksBlockListener implements Listener {
 						event.setCancelled(true);
 						player.sendMessage(ChatColor.RED + "Can not remove that DP sign!");
 						sign.setLine(1, ChatColor.GOLD + "[Drop Party!]");
-						sign.setLine(2, "[R Click = 1]");
-						sign.setLine(3, "[L Click = 6]");
+						sign.setLine(2, ChatColor.GREEN +  "L = 6 | R = 1");
 						sign.update();
 						
 						
@@ -1138,17 +1322,31 @@ public class colourfireworksBlockListener implements Listener {
 		
 		if (event.getLine(1).equalsIgnoreCase("[DP]")
 				|| (event.getLine(1).equalsIgnoreCase("[D P]")|| (event.getLine(1).contains("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[DropParty]")))))) {
-			if (player.hasPermission("colourfireworks.dropparty.*")
-					|| (player.hasPermission("colourfirework.*") || (player.hasPermission("colourfirework.dropparty.create") || player
-							.isOp()))) {
+			if (player.hasPermission("colourfireworks.dropparty.create") || player
+							.isOp()) {
 				
 				event.setLine(1, ChatColor.GOLD + "[Drop Party!]");
-				event.setLine(2, "[R Click = 1]");
-				event.setLine(3, "[L Click = 6]");
+				event.setLine(2, ChatColor.GREEN +  "L = 6 | R = 1");
 				
 				if (!colourfireworks.allreadyone.containsKey("On")) {
 					Sign sign2 = (Sign) block.getState();
 					Location placeofchest = sign2.getLocation();
+					
+					if (player.hasPermission("colourfireworks.notifyupdate")
+							|| player.isOp()) {
+						
+						if (colourfireworks.latestversion == false) {
+							String latestversion = URLReader.latestversion;
+							player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
+									+ "ColourFireWorks" + ChatColor.AQUA + "]"
+									+ ChatColor.RED + " Version " + ChatColor.LIGHT_PURPLE +  latestversion
+									+ ChatColor.RED + " is out!");
+							player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
+									+ "ColourFireWorks" + ChatColor.AQUA + "]"
+									+ ChatColor.RED + " Currently using version " + ChatColor.LIGHT_PURPLE +  plugin.getDescription().getVersion());
+						}
+
+					}
 
 					player.sendMessage(ChatColor.GOLD
 							+ "DropParty Started");
@@ -1160,6 +1358,15 @@ public class colourfireworksBlockListener implements Listener {
 					int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
 					Entity chicken = block.getWorld().spawnCreature(
 							block.getLocation(), EntityType.CHICKEN);
+					
+					if (chicken == null){
+						player.sendMessage(ChatColor.RED + "An Error occured, Please try again?"); 
+						stopDropParty();
+					}
+					
+					if (chicken == null)	
+					return;
+						
 					
 
 					
@@ -1229,9 +1436,8 @@ public class colourfireworksBlockListener implements Listener {
 
 		if (event.getLine(1).equalsIgnoreCase("[FireWork]")
 				|| (event.getLine(1).equalsIgnoreCase("[Fire Work]"))) {
-			if (player.hasPermission("colourfireworks.redstonesign.all")
-					|| (player.hasPermission("colourfirework.*") || player
-							.isOp())) {
+			if (player.hasPermission("colourfireworks.redstonesign.*") || player
+							.isOp()) {
 				event.setLine(1, "[FireWork]");
 			} else {
 				block.setType(Material.AIR);
@@ -1239,9 +1445,7 @@ public class colourfireworksBlockListener implements Listener {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to create a firework sign!");
 			}
-			if (player.hasPermission("colourfireworks.redstonesign.all")
-					|| (player.hasPermission("colourfirework.*") || player
-							.isOp())) {
+			if (player.hasPermission("colourfireworks.redstonesign.*") || player.isOp()) {
 				if (event.getLine(2).equalsIgnoreCase("[white]")
 						|| (event.getLine(2).equalsIgnoreCase("[35]"))
 						|| (event.getLine(1).equalsIgnoreCase("[35:1]"))) {

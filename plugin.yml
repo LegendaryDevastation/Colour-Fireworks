@@ -1,6 +1,6 @@
 name:  ColourFireWorks
 main:  me.craftiii4.colourfireworks.colourfireworks
-version:  1.3.5
+version:  2.0.0
 website:  N/A
 author:  Craftiii4
 commands:
@@ -12,3 +12,90 @@ commands:
     description: Command
   colorfirework:
     description: Command
+permissions:
+    colourfireworks.*:
+        description: All colourfireworks permissions
+        children:
+            colourfireworks.limited.*: true
+            colourfireworks.unlimited.*: true
+            colourfireworks.redstonesign.*: true
+            colourfireworks.dropparty.*: true
+            colourfireworks.economy.*: true
+            colourfireworks.reload: true
+            colourfireworks.notifyupdate: true
+    colourfireworks.economy.*:
+        description: Access to all economy fireworks
+        children:
+            colourfireworks.economy.wool.*: true
+            colourfireworks.economy.pumpkin: true
+            colourfireworks.economy.snowblock: true
+            colourfireworks.economy.exp: true
+    colourfireworks.economy.wool.*:
+        description: Access to all economy fireworks
+        children:
+            colourfireworks.economy.wool.white: true
+            colourfireworks.economy.wool.orange: true
+            colourfireworks.economy.wool.magenta: true
+            colourfireworks.economy.wool.lightblue: true
+            colourfireworks.economy.wool.yellow: true
+            colourfireworks.economy.wool.lime: true
+            colourfireworks.economy.wool.pink: true
+            colourfireworks.economy.wool.gray: true
+            colourfireworks.economy.wool.silver: true
+            colourfireworks.economy.wool.cyan: true
+            colourfireworks.economy.wool.purple: true
+            colourfireworks.economy.wool.blue: true
+            colourfireworks.economy.wool.brown: true
+            colourfireworks.economy.wool.green: true
+            colourfireworks.economy.wool.red: true
+            colourfireworks.economy.wool.black: true
+    colourfireworks.limited.*:
+        description: Access to all limited fireworks
+        children:
+            colourfireworks.limited.pumpkin: true
+            colourfireworks.limited.snowblock: true
+            colourfireworks.limited.exp: true            
+            colourfireworks.limited.white: true
+            colourfireworks.limited.orange: true
+            colourfireworks.limited.magenta: true
+            colourfireworks.limited.lightblue: true
+            colourfireworks.limited.yellow: true
+            colourfireworks.limited.lime: true
+            colourfireworks.limited.pink: true
+            colourfireworks.limited.gray: true
+            colourfireworks.limited.silver: true
+            colourfireworks.limited.cyan: true
+            colourfireworks.limited.purple: true
+            colourfireworks.limited.blue: true
+            colourfireworks.limited.brown: true
+            colourfireworks.limited.green: true
+            colourfireworks.limited.red: true
+            colourfireworks.limited.black: true
+    colourfireworks.unlimited.*:
+        description: Access to all unlimited fireworks
+        children:
+            colourfireworks.unlimited.pumpkin: true
+            colourfireworks.unlimited.snowblock: true
+            colourfireworks.unlimited.exp: true
+            colourfireworks.unlimited.white: true
+            colourfireworks.unlimited.orange: true
+            colourfireworks.unlimited.magenta: true
+            colourfireworks.unlimited.lightblue: true
+            colourfireworks.unlimited.yellow: true
+            colourfireworks.unlimited.lime: true
+            colourfireworks.unlimited.pink: true
+            colourfireworks.unlimited.gray: true
+            colourfireworks.unlimited.silver: true
+            colourfireworks.unlimited.cyan: true
+            colourfireworks.unlimited.purple: true
+            colourfireworks.unlimited.blue: true
+            colourfireworks.unlimited.brown: true
+            colourfireworks.unlimited.green: true
+            colourfireworks.unlimited.red: true
+            colourfireworks.unlimited.black: true
+    colourfireworks.dropparty.*:
+        description: All drop party permissions
+        children:
+            colourfireworks.dropparty.add: true
+            colourfireworks.dropparty.create: true
+            colourfireworks.dropparty.stop: true
