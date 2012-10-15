@@ -1,17 +1,19 @@
 name:  ColourFireWorks
 main:  me.craftiii4.colourfireworks.colourfireworks
-version:  2.0.0
+version:  2.0.5
 website:  N/A
 author:  Craftiii4
 commands:
   colourfireworks:
-    description: Command
+    description: Base Command (with s)
   colourfirework:
-    description: Command
+    description: Base Command (with out s)
   colorfireworks:
-    description: Command
+    description: Base Command (with out o and with s)
   colorfirework:
-    description: Command
+    description: Base Command (with out o and s)  
+  dropcast:
+    description: Broadcast a message to the server
 permissions:
     colourfireworks.*:
         description: All colourfireworks permissions
@@ -99,3 +101,6 @@ permissions:
             colourfireworks.dropparty.add: true
             colourfireworks.dropparty.create: true
             colourfireworks.dropparty.stop: true
+            colourfireworks.dropparty.unban: true
+            colourfireworks.dropparty.ban: true
+            colourfireworks.dropparty.dropcast: true

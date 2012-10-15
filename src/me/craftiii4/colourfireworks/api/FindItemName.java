@@ -22,14 +22,14 @@ public class FindItemName {
 
 		int radius = plugin.getdroppartyConfig().getInt(
 				"DropParty.Message.Radius");
-		
 
-		//Block block = colourfireworksBlockListener.location.getBlock();
+		// Block block = colourfireworksBlockListener.location.getBlock();
 
-		//Entity chicken = block.getWorld().spawnCreature(block.getLocation(), EntityType.CHICKEN);
+		// Entity chicken = block.getWorld().spawnCreature(block.getLocation(),
+		// EntityType.CHICKEN);
 		List<Entity> list = player.getNearbyEntities(radius, radius, radius);
-				
-		//chicken.remove();
+
+		// chicken.remove();
 
 		String itemnamebackup23 = null;
 
@@ -52,6 +52,9 @@ public class FindItemName {
 			if (itemsubid == 3) {
 				itemnamebackup23 = "Jungle Wooden Plank";
 			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Wooden Plank";
+			}
 		}
 
 		if (itemid == 6) {
@@ -67,6 +70,9 @@ public class FindItemName {
 			}
 			if (itemsubid == 3) {
 				itemnamebackup23 = "Jungle Sapling";
+			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Sapling";
 			}
 		}
 
@@ -84,21 +90,27 @@ public class FindItemName {
 			if (itemsubid == 3) {
 				itemnamebackup23 = "Jungle Wood";
 			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Wood";
+			}
 		}
 
 		if (itemid == 18) {
 			manualnameset = true;
-			if (itemsubid == 0) {
-				itemnamebackup23 = "Leaves";
+			if (itemsubid == 0 || itemsubid == 4) {
+				itemnamebackup23 = "Oak Leaves";
 			}
-			if (itemsubid == 1) {
-				itemnamebackup23 = "Pine Leaves";
+			if (itemsubid == 1 || itemsubid == 5) {
+				itemnamebackup23 = "Spruce Leaves";
 			}
-			if (itemsubid == 2) {
+			if (itemsubid == 2 || itemsubid == 6) {
 				itemnamebackup23 = "Birch Leaves";
 			}
-			if (itemsubid == 3) {
+			if (itemsubid == 3 || itemsubid == 7) {
 				itemnamebackup23 = "Jungle Leaves";
+			}
+			if (itemsubid > 7) {
+				itemnamebackup23 = "Unknown Leaves";
 			}
 		}
 
@@ -112,6 +124,9 @@ public class FindItemName {
 			}
 			if (itemsubid == 2) {
 				itemnamebackup23 = "Smooth Sandstone";
+			}
+			if (itemsubid > 2) {
+				itemnamebackup23 = "Unknown Sandstone";
 			}
 		}
 
@@ -130,6 +145,9 @@ public class FindItemName {
 			}
 			if (itemsubid == 2) {
 				itemnamebackup23 = "Fern Grass";
+			}
+			if (itemsubid > 2) {
+				itemnamebackup23 = "Unknown Grass";
 			}
 		}
 
@@ -188,6 +206,9 @@ public class FindItemName {
 			if (itemsubid == 15) {
 				itemnamebackup23 = "Black Wool";
 			}
+			if (itemsubid > 15) {
+				itemnamebackup23 = "Unknown Wool";
+			}
 
 		}
 
@@ -216,6 +237,9 @@ public class FindItemName {
 			if (itemsubid == 5) {
 				itemnamebackup23 = "Double Stone Brick Slab";
 			}
+			if (itemsubid > 5) {
+				itemnamebackup23 = "Unknown Double Slab";
+			}
 
 		}
 		if (itemid == 44) {
@@ -238,7 +262,9 @@ public class FindItemName {
 			if (itemsubid == 5) {
 				itemnamebackup23 = "Stone Brick Slab";
 			}
-
+			if (itemsubid > 5) {
+				itemnamebackup23 = "Unknown Slab";
+			}
 		}
 
 		if (itemid == 62) {
@@ -269,6 +295,9 @@ public class FindItemName {
 			if (itemsubid == 2) {
 				itemnamebackup23 = "Silverfish Stone Brick";
 			}
+			if (itemsubid > 2) {
+				itemnamebackup23 = "Unknown Silverfish Block";
+			}
 
 		}
 		if (itemid == 98) {
@@ -285,6 +314,45 @@ public class FindItemName {
 			if (itemsubid == 3) {
 				itemnamebackup23 = "Circle Stone Brick";
 			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Stone Brick";
+			}
+		}
+		if (itemid == 125) {
+			manualnameset = true;
+			if (itemsubid == 0) {
+				itemnamebackup23 = "Oak-Wood Slab (Double)";
+			}
+			if (itemsubid == 1) {
+				itemnamebackup23 = "Pine-Wood Slab (Double)";
+			}
+			if (itemsubid == 2) {
+				itemnamebackup23 = "Birch-Wood Slab (Double)";
+			}
+			if (itemsubid == 3) {
+				itemnamebackup23 = "Jungle-Wood Slab (Double)";
+			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Wood Slab (Double)";
+			}
+		}
+		if (itemid == 126) {
+			manualnameset = true;
+			if (itemsubid == 0) {
+				itemnamebackup23 = "Oak-Wood Slab";
+			}
+			if (itemsubid == 1) {
+				itemnamebackup23 = "Pine-Wood Slab";
+			}
+			if (itemsubid == 2) {
+				itemnamebackup23 = "Birch-Wood Slab";
+			}
+			if (itemsubid == 3) {
+				itemnamebackup23 = "Jungle-Wood Slab";
+			}
+			if (itemsubid > 3) {
+				itemnamebackup23 = "Unknown Wood Slab";
+			}
 		}
 		if (itemid == 263) {
 			manualnameset = true;
@@ -293,6 +361,21 @@ public class FindItemName {
 			}
 			if (itemsubid == 1) {
 				itemnamebackup23 = "Charcoal";
+			}
+			if (itemsubid > 1) {
+				itemnamebackup23 = "Unknown Char/coal";
+			}
+		}
+		if (itemid == 322) {
+			manualnameset = true;
+			if (itemsubid == 0) {
+				itemnamebackup23 = "§6Golden §4Apple";
+			}
+			if (itemsubid == 1) {
+				itemnamebackup23 = "§aEnchanted §6Golden §4Apple";
+			}
+			if (itemsubid > 1) {
+				itemnamebackup23 = "Unknown §6Golden §4Apple";
 			}
 		}
 
@@ -346,6 +429,9 @@ public class FindItemName {
 			if (itemsubid == 15) {
 				itemnamebackup23 = "Bone Meal";
 			}
+			if (itemsubid > 15) {
+				itemnamebackup23 = "Unknown Dye";
+			}
 
 		}
 
@@ -368,19 +454,19 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Mundane Potion";
 			}
-			if (itemsubid == 8193) {
+			if (itemsubid == 8193 || itemsubid == 16273) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Potion (0:45)";
 			}
-			if (itemsubid == 8194) {
+			if (itemsubid == 8194 || itemsubid == 16274) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Potion (3:00)";
 			}
-			if (itemsubid == 8195) {
+			if (itemsubid == 8195 || itemsubid == 16307) {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Potion (3:00)";
 			}
-			if (itemsubid == 8196) {
+			if (itemsubid == 8196 || itemsubid == 16276) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Potion (0:45)";
 			}
@@ -388,15 +474,15 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Healing Potion";
 			}
-			if (itemsubid == 8200) {
+			if (itemsubid == 8200 || itemsubid == 16312) {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Potion (1:30)";
 			}
-			if (itemsubid == 8201) {
+			if (itemsubid == 8201 || itemsubid == 16281) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Potion (3:00)";
 			}
-			if (itemsubid == 8202) {
+			if (itemsubid == 8202 || itemsubid == 16314) {
 				isapotion = true;
 				itemnamebackup23 = "Slowness Potion (1:30)";
 			}
@@ -404,11 +490,11 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Harming Potion";
 			}
-			if (itemsubid == 8225) {
+			if (itemsubid == 8225 || itemsubid == 16305) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Potion II (0:22)";
 			}
-			if (itemsubid == 8226) {
+			if (itemsubid == 8226 || itemsubid == 16306) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Potion II (1:30)";
 			}
@@ -416,7 +502,7 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Potion (3:00)";
 			}
-			if (itemsubid == 8228) {
+			if (itemsubid == 8228 || itemsubid == 16308) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Potion II (0:22)";
 			}
@@ -428,7 +514,7 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Potion (1:30)";
 			}
-			if (itemsubid == 8233) {
+			if (itemsubid == 8233 || itemsubid == 16313) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Potion II (1:30)";
 			}
@@ -440,19 +526,19 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Harming Potion II";
 			}
-			if (itemsubid == 8257) {
+			if (itemsubid == 8257 || itemsubid == 16337) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Potion (2:00)";
 			}
-			if (itemsubid == 8258) {
+			if (itemsubid == 8258 || itemsubid == 16338) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Potion (8:00)";
 			}
-			if (itemsubid == 8259) {
+			if (itemsubid == 8259 || itemsubid == 16371) {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Potion (8:00)";
 			}
-			if (itemsubid == 8260) {
+			if (itemsubid == 8260 || itemsubid == 16340) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Potion (2:00)";
 			}
@@ -460,15 +546,15 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Healing Potion)";
 			}
-			if (itemsubid == 8264) {
+			if (itemsubid == 8264 || itemsubid == 16376) {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Potion (4:00)";
 			}
-			if (itemsubid == 8265) {
+			if (itemsubid == 8265 || itemsubid == 16345) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Potion (8:00)";
 			}
-			if (itemsubid == 8266) {
+			if (itemsubid == 8266 || itemsubid == 16378) {
 				isapotion = true;
 				itemnamebackup23 = "Slowness Potion (4:00)";
 			}
@@ -477,47 +563,73 @@ public class FindItemName {
 				itemnamebackup23 = "Harming Potion";
 			}
 
-			if (itemsubid == 16385) {
+			//
+
+			if (itemsubid == 16369) {
+				isapotion = true;
+				itemnamebackup23 = "Regeneration Potion II (1:00)";
+			}
+
+			if (itemsubid == 16370) {
+				isapotion = true;
+				itemnamebackup23 = "Swiftness Potion II (4:00)";
+			}
+
+			if (itemsubid == 16372) {
+				isapotion = true;
+				itemnamebackup23 = "Poison Potion II (1:00)";
+			}
+
+			if (itemsubid == 16377) {
+				isapotion = true;
+				itemnamebackup23 = "Strength Potion II (4:00)";
+			}
+
+			//
+
+			//
+
+			if (itemsubid == 16385 || itemsubid == 32657) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Splash (0:33)";
 			}
-			if (itemsubid == 16386) {
+			if (itemsubid == 16386 || itemsubid == 32658) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Splash (2:15)";
 			}
-			if (itemsubid == 16387) {
+			if (itemsubid == 16387 || itemsubid == 32691) {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Splash (2:15)";
 			}
-			if (itemsubid == 16388) {
+			if (itemsubid == 16388 || itemsubid == 32660) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Splash (0:33)";
 			}
-			if (itemsubid == 16389) {
+			if (itemsubid == 16389 || itemsubid == 32725) {
 				isapotion = true;
-				itemnamebackup23 = "Healing Splash";
+				itemnamebackup23 = "Instant Health Splash";
 			}
-			if (itemsubid == 16392) {
+			if (itemsubid == 16392 || itemsubid == 32696) {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Splash (1:07))";
 			}
-			if (itemsubid == 16393) {
+			if (itemsubid == 16393 || itemsubid == 32665) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Splash (2:15)";
 			}
-			if (itemsubid == 16394) {
+			if (itemsubid == 16394 || itemsubid == 32698) {
 				isapotion = true;
 				itemnamebackup23 = "Slowness Splash (1:07)";
 			}
-			if (itemsubid == 16396) {
+			if (itemsubid == 16396 || itemsubid == 32732) {
 				isapotion = true;
-				itemnamebackup23 = "Harming Splash";
+				itemnamebackup23 = "Instant Damage Splash";
 			}
-			if (itemsubid == 16417) {
+			if (itemsubid == 16417 || itemsubid == 32689) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Splash II (0:16)";
 			}
-			if (itemsubid == 16418) {
+			if (itemsubid == 16418 || itemsubid == 32690) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Splash II (1:07)";
 			}
@@ -525,19 +637,19 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Splash (2:15)";
 			}
-			if (itemsubid == 16420) {
+			if (itemsubid == 16420 || itemsubid == 32692) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Splash II (0:16)";
 			}
-			if (itemsubid == 16421) {
+			if (itemsubid == 16421 || itemsubid == 32757) {
 				isapotion = true;
-				itemnamebackup23 = "Healing Splash II";
+				itemnamebackup23 = "Instant Health Splash II";
 			}
 			if (itemsubid == 16424) {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Splash (1:07)";
 			}
-			if (itemsubid == 16425) {
+			if (itemsubid == 16425 || itemsubid == 32697) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Splash II (1:07)";
 			}
@@ -545,45 +657,61 @@ public class FindItemName {
 				isapotion = true;
 				itemnamebackup23 = "Slowness Splash (1:07)";
 			}
-			if (itemsubid == 16428) {
+			if (itemsubid == 16428 || itemsubid == 32764) {
 				isapotion = true;
-				itemnamebackup23 = "Harming Splash II";
+				itemnamebackup23 = "Instant Damage Splash II";
 			}
-			if (itemsubid == 16449) {
+			if (itemsubid == 16449 || itemsubid == 32721) {
 				isapotion = true;
 				itemnamebackup23 = "Regeneration Splash (1:30)";
 			}
-			if (itemsubid == 16450) {
+			if (itemsubid == 16450 || itemsubid == 32722) {
 				isapotion = true;
 				itemnamebackup23 = "Swiftness Splash (6:00)";
 			}
-			if (itemsubid == 16451) {
+			if (itemsubid == 16451 || itemsubid == 32755) {
 				isapotion = true;
 				itemnamebackup23 = "Fire Resistance Splash (6:00)";
 			}
-			if (itemsubid == 16452) {
+			if (itemsubid == 16452 || itemsubid == 32724) {
 				isapotion = true;
 				itemnamebackup23 = "Poison Splash (1:30)";
 			}
 			if (itemsubid == 16453) {
 				isapotion = true;
-				itemnamebackup23 = "Healing Splash";
+				itemnamebackup23 = "Instant Health Splash";
 			}
-			if (itemsubid == 16456) {
+			if (itemsubid == 16456 || itemsubid == 32760) {
 				isapotion = true;
 				itemnamebackup23 = "Weakness Splash (3:00)";
 			}
-			if (itemsubid == 16457) {
+			if (itemsubid == 16457 || itemsubid == 32729) {
 				isapotion = true;
 				itemnamebackup23 = "Strength Splash (6:00)";
 			}
-			if (itemsubid == 16458) {
+			if (itemsubid == 16458 || itemsubid == 32762) {
 				isapotion = true;
 				itemnamebackup23 = "Slowness Splash (3:00)";
 			}
 			if (itemsubid == 16460) {
 				isapotion = true;
-				itemnamebackup23 = "Harming Splash";
+				itemnamebackup23 = "Instant Damage Splash";
+			}
+			if (itemsubid == 32753) {
+				isapotion = true;
+				itemnamebackup23 = "Regeneration Splash II (0:45)";
+			}
+			if (itemsubid == 32754) {
+				isapotion = true;
+				itemnamebackup23 = "Swiftness Splash II (3:00)";
+			}
+			if (itemsubid == 32756) {
+				isapotion = true;
+				itemnamebackup23 = "Poison Splash II (0:45)";
+			}
+			if (itemsubid == 32761) {
+				isapotion = true;
+				itemnamebackup23 = "Strength Splash II (3:00)";
 			}
 			if (isapotion == false) {
 				itemnamebackup23 = "Unknown Potion";
@@ -682,6 +810,53 @@ public class FindItemName {
 				itemnamebackup23 = "Unknown Spawner Egg";
 			}
 
+		}
+
+		if (itemid == 2256) {
+			manualnameset = true;
+			itemnamebackup23 = "13 Music Disk §7(§6Gold§7)§6";
+		}
+		if (itemid == 2257) {
+			manualnameset = true;
+			itemnamebackup23 = "Cat Music Disk §7(§aGreen§7)§6";
+		}
+		if (itemid == 2258) {
+			manualnameset = true;
+			itemnamebackup23 = "Blocks Music Disk §7(§cOrange§7)§6";
+		}
+		if (itemid == 2259) {
+			manualnameset = true;
+			itemnamebackup23 = "Chirp Music Disk §7(§4Red§7)§6";
+		}
+		if (itemid == 2260) {
+			manualnameset = true;
+			itemnamebackup23 = "Far Music Disk §7(§aG§7/§eY§7/§fW§7)§6";
+		}
+		if (itemid == 2261) {
+			manualnameset = true;
+			itemnamebackup23 = "Mall Music Disk §7(§5Purple§7)§6";
+		}
+		if (itemid == 2262) {
+			manualnameset = true;
+			itemnamebackup23 = "Mellohi Music Disk §7(§dP§7/§fW§7)§6";
+		}
+
+		if (itemid == 2263) {
+			manualnameset = true;
+			itemnamebackup23 = "Stal Music Disk §7(§0Black§7)§6";
+		}
+
+		if (itemid == 2264) {
+			manualnameset = true;
+			itemnamebackup23 = "Stard Music Disk §7(§fWhite§7)§6";
+		}
+		if (itemid == 2265) {
+			manualnameset = true;
+			itemnamebackup23 = "Stard Music Disk §7(§2G§7/§aG§7)§6";
+		}
+		if (itemid == 2266) {
+			manualnameset = true;
+			itemnamebackup23 = "13 Music Disk §7(§3Broken§7)§6";
 		}
 
 		if (manualnameset == false) {
@@ -950,216 +1125,212 @@ public class FindItemName {
 			}
 
 		}
-		
+
 		if (message != null) {
-			
+
 			String enchantmentstoadd = "";
-			
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.ARROW_DAMAGE)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.ARROW_DAMAGE);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arrow Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.ARROW_DAMAGE)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.ARROW_DAMAGE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Arrow Damage " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.ARROW_FIRE)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.ARROW_FIRE);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire Arrows " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.ARROW_FIRE)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.ARROW_FIRE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Fire Arrows " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.ARROW_INFINITE)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.ARROW_INFINITE);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Infinite Arrows " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.ARROW_INFINITE)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.ARROW_INFINITE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Infinite Arrows " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.ARROW_KNOCKBACK)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.ARROW_KNOCKBACK);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arrow Knockback " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.ARROW_KNOCKBACK)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.ARROW_KNOCKBACK);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Arrow Knockback " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.DAMAGE_ALL)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.DAMAGE_ALL);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "More Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.DAMAGE_ALL)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.DAMAGE_ALL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "More Damage " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.DAMAGE_ARTHROPODS)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.DAMAGE_ARTHROPODS);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Arthropods " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.DAMAGE_ARTHROPODS)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.DAMAGE_ARTHROPODS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Arthropods " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.DAMAGE_UNDEAD)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.DAMAGE_UNDEAD);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Undead Damage " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.DAMAGE_UNDEAD)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.DAMAGE_UNDEAD);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Undead Damage " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.DIG_SPEED)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.DIG_SPEED);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Dig Speed " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.DIG_SPEED)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.DIG_SPEED);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Dig Speed " + ChatColor.GRAY + "["
+						+ ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.DURABILITY)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.DURABILITY);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Durability " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.DURABILITY)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.DURABILITY);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Durability " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.FIRE_ASPECT)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.FIRE_ASPECT);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.FIRE_ASPECT)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.FIRE_ASPECT);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Fire " + ChatColor.GRAY + "["
+						+ ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.KNOCKBACK)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.KNOCKBACK);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Knockback " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.KNOCKBACK)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.KNOCKBACK);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Knockback " + ChatColor.GRAY + "["
+						+ ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.LOOT_BONUS_BLOCKS)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.LOOT_BONUS_BLOCKS);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Block Loot " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.LOOT_BONUS_BLOCKS)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.LOOT_BONUS_BLOCKS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Block Loot " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.LOOT_BONUS_MOBS)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.LOOT_BONUS_MOBS);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Mob Loot " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.LOOT_BONUS_MOBS)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.LOOT_BONUS_MOBS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Mob Loot " + ChatColor.GRAY + "["
+						+ ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.OXYGEN)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.OXYGEN);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Oxygen " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(Enchantment.OXYGEN)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.OXYGEN);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Oxygen " + ChatColor.GRAY + "["
+						+ ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.PROTECTION_ENVIRONMENTAL)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.PROTECTION_ENVIRONMENTAL);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Environment Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.PROTECTION_ENVIRONMENTAL)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.PROTECTION_ENVIRONMENTAL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Environment Protection "
+						+ ChatColor.GRAY + "[" + ChatColor.RED + level
+						+ ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.PROTECTION_EXPLOSIONS)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.PROTECTION_EXPLOSIONS);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Explosion Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.PROTECTION_EXPLOSIONS)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.PROTECTION_EXPLOSIONS);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Explosion Protection "
+						+ ChatColor.GRAY + "[" + ChatColor.RED + level
+						+ ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.PROTECTION_FALL)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.PROTECTION_FALL);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fall Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.PROTECTION_FALL)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.PROTECTION_FALL);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Fall Protection " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.PROTECTION_FIRE)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.PROTECTION_FIRE);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Fire Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.PROTECTION_FIRE)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.PROTECTION_FIRE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Fire Protection " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player
-					.getItemInHand()
-					.containsEnchantment(
-							Enchantment.PROTECTION_PROJECTILE)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.PROTECTION_PROJECTILE);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Projectile Protection " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.PROTECTION_PROJECTILE)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.PROTECTION_PROJECTILE);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Projectile Protection "
+						+ ChatColor.GRAY + "[" + ChatColor.RED + level
+						+ ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.SILK_TOUCH)) {
-				int level = player.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.SILK_TOUCH);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Silk Touch " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.SILK_TOUCH)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.SILK_TOUCH);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Silk Touch " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			if (player.getItemInHand()
-					.containsEnchantment(
-							Enchantment.WATER_WORKER)) {
-				int level = player
-						.getItemInHand()
-						.getEnchantmentLevel(
-								Enchantment.WATER_WORKER);
-				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD +" (" + ChatColor.GREEN + "Water Worker " + ChatColor.GRAY + "[" + ChatColor.RED + level + ChatColor.GRAY + "]" + ChatColor.GOLD + ")";
+			if (player.getItemInHand().containsEnchantment(
+					Enchantment.WATER_WORKER)) {
+				int level = player.getItemInHand().getEnchantmentLevel(
+						Enchantment.WATER_WORKER);
+				enchantmentstoadd = enchantmentstoadd + ChatColor.GOLD + " ("
+						+ ChatColor.GREEN + "Water Worker " + ChatColor.GRAY
+						+ "[" + ChatColor.RED + level + ChatColor.GRAY + "]"
+						+ ChatColor.GOLD + ")";
 			}
-			
-			
-			
-						
-			String newmessage = message.replace(player.getName(), "").replace("just", "You");
-			
+
+			String newmessage = message.replace(player.getName(), "").replace(
+					"just", "You");
+
 			player.sendMessage(newmessage + enchantmentstoadd);
-			
+
 			while (test02 > test01) {
 
 				Entity entity = list.get(test01);
 				if (entity instanceof Player) {
-					((Player) entity).getPlayer().sendMessage(message + enchantmentstoadd);
+					((Player) entity).getPlayer().sendMessage(
+							message + enchantmentstoadd);
 
 				}
 

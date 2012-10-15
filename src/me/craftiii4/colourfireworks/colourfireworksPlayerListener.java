@@ -11,6 +11,7 @@ import me.craftiii4.colourfireworks.fireworks.FireworkPumpkin;
 import me.craftiii4.colourfireworks.fireworks.FireworkSnowBlock;
 import me.craftiii4.colourfireworks.fireworks.WhichWoolBlock;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -52,34 +53,37 @@ public class colourfireworksPlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
-
+		final Player player = event.getPlayer();
+		
+			
+		
 		if (player.hasPermission("colourfireworks.notifyupdate")
 				|| player.isOp()) {
 
 			if (plugin.getConfig().getBoolean(
 					"Config.CheckforUpdate.Permission") == true) {
+				
+				
+				plugin.getServer()
+				.getScheduler()
+				.scheduleSyncDelayedTask(plugin,
+						new Runnable() {
 
-				try {
-					URLReader.main2();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+							public void run() {
 
-				if (colourfireworks.latestversion == false) {
-					String latestversion = URLReader.latestversion;
-					player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
-							+ "ColourFireWorks" + ChatColor.AQUA + "]"
-							+ ChatColor.RED + " Version "
-							+ ChatColor.LIGHT_PURPLE + latestversion
-							+ ChatColor.RED + " is out!");
-					player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
-							+ "ColourFireWorks" + ChatColor.AQUA + "]"
-							+ ChatColor.RED + " Currently using version "
-							+ ChatColor.LIGHT_PURPLE
-							+ plugin.getDescription().getVersion());
-				}
+								try {
+									URLReader.main2(plugin, player);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
+							}
+						}, 40);
+				
+
+
+				
 
 			}
 
@@ -93,6 +97,7 @@ public class colourfireworksPlayerListener implements Listener {
 		Player player = event.getPlayer();
 		Block block = event.getClickedBlock();
 		// Check if the interaction was a player right clicking a block
+		
 
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)
 				|| (event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
@@ -137,6 +142,13 @@ public class colourfireworksPlayerListener implements Listener {
 									correctammount = false;
 									player.sendMessage(ChatColor.RED
 											+ "Error, That item is blocked!");
+									event.setCancelled(true);
+								}
+								
+								if (type == 387) {
+									player.sendMessage(ChatColor.RED + "Written Books are not yet supported, sorry :(");
+									alreadlydone = true;
+									correctammount = false;
 									event.setCancelled(true);
 								}
 
@@ -442,11 +454,11 @@ public class colourfireworksPlayerListener implements Listener {
 
 								}
 								if (alreadlydone == false) {
-									if (iteminhandammount > 6) {
+									if (iteminhandammount > 8) {
 										alreadlydone = true;
 										if (event.getAction().equals(
 												Action.RIGHT_CLICK_BLOCK)) {
-											howmany = 6;
+											howmany = 8;
 											correctammount = true;
 											// player.getItemInHand()
 											// .setAmount(
@@ -467,7 +479,7 @@ public class colourfireworksPlayerListener implements Listener {
 								}
 
 								if (alreadlydone == false) {
-									if (iteminhandammount < 6) {
+									if (iteminhandammount < 8) {
 										if (iteminhandammount > 1) {
 											alreadlydone = true;
 											if (event.getAction().equals(
@@ -475,7 +487,7 @@ public class colourfireworksPlayerListener implements Listener {
 												howmany = 0;
 												correctammount = false;
 												player.sendMessage(ChatColor.RED
-														+ "Error, You need to be holding 6 of that item!");
+														+ "Error, You need to be holding 8 of that item!");
 												event.setCancelled(true);
 											}
 											if (event.getAction().equals(
@@ -501,7 +513,7 @@ public class colourfireworksPlayerListener implements Listener {
 											howmany = 0;
 											correctammount = false;
 											player.sendMessage(ChatColor.RED
-													+ "Error, You need to be holding 6 of that item!");
+													+ "Error, You need to be holding 8 of that item!");
 											event.setCancelled(true);
 										}
 										if (event.getAction().equals(
@@ -521,12 +533,12 @@ public class colourfireworksPlayerListener implements Listener {
 								}
 
 								if (alreadlydone == false) {
-									if (iteminhandammount == 6) {
+									if (iteminhandammount == 8) {
 
 										alreadlydone = true;
 										if (event.getAction().equals(
 												Action.RIGHT_CLICK_BLOCK)) {
-											howmany = 6;
+											howmany = 8;
 											correctammount = true;
 											// ItemStack test = new
 											// ItemStack(type,
@@ -613,11 +625,6 @@ public class colourfireworksPlayerListener implements Listener {
 
 												int level = Integer
 														.parseInt(levelstring);
-
-												System.out
-														.println("[ColourFireWorks] "
-																+ completeenchant
-																+ " " + level);
 
 												if (completeenchant
 														.equals("ARROW_DAMAGE")) {
@@ -798,9 +805,150 @@ public class colourfireworksPlayerListener implements Listener {
 						}
 
 					} else {
-						player.sendMessage(ChatColor.RED
-								+ "An error occured! No Drop Party currently active!");
-						block.setType(Material.AIR);
+						
+						if (sign.getLine(0).contains("[A]")) {
+							if (!colourfireworks.allreadyone.containsKey("On")) {
+								Sign sign2 = (Sign) block.getState();
+								Location placeofchest = sign2.getLocation();
+								
+
+								player.sendMessage(ChatColor.GOLD
+										+ "DropParty Started");
+								
+								colourfireworksBlockListener.location = placeofchest;
+								
+								colourfireworks.allreadyone.put("On", true);
+								
+								int radius = plugin.getdroppartyConfig().getInt(
+										"DropParty.Message.Radius");
+
+								colourfireworks.MaxandMin.clear();
+								colourfireworks.dpworld.clear();
+								
+								
+								colourfireworks.MaxandMin.put("MaxX", block
+										.getLocation().getBlockX() + radius);
+								
+								colourfireworks.MaxandMin.put("MinX", block
+										.getLocation().getBlockX() - radius);
+
+								colourfireworks.MaxandMin.put("MaxZ", block
+										.getLocation().getBlockZ() + radius);
+								colourfireworks.MaxandMin.put("MinZ", block
+										.getLocation().getBlockZ() - radius);
+
+								colourfireworks.MaxandMin.put("MaxY", block
+										.getLocation().getBlockY() + radius);
+								colourfireworks.MaxandMin.put("MinY", block
+										.getLocation().getBlockY() - radius);
+
+								colourfireworks.dpworld.put("World", block.getWorld()
+										.getName());
+
+								String wname = colourfireworks.dpworld.get("World");
+
+								double maxx = colourfireworks.MaxandMin.get("MaxX");
+								double minx = colourfireworks.MaxandMin.get("MinX");
+
+								double maxy = colourfireworks.MaxandMin.get("MaxY");
+								double miny = colourfireworks.MaxandMin.get("MinY");
+
+								double maxz = colourfireworks.MaxandMin.get("MaxZ");
+								double minz = colourfireworks.MaxandMin.get("MinZ");
+								
+								List<Player> playersinworld = Bukkit.getWorld(wname)
+										.getPlayers();
+
+								int test01 = 0;
+								int test02 = playersinworld.size();
+
+								while (test02 > test01) {
+									Player playerpicked = playersinworld.get(test01);
+
+									if (playerpicked.getLocation().getBlockX() < maxx) {
+										if (playerpicked.getLocation().getBlockX() > minx) {
+											if (playerpicked.getLocation().getBlockY() < maxy) {
+												if (playerpicked.getLocation().getBlockY() > miny) {
+													if (playerpicked.getLocation()
+															.getBlockZ() < maxz) {
+														if (playerpicked.getLocation()
+																.getBlockZ() > minz) {
+															playerpicked
+																	.sendMessage(ChatColor.GOLD
+																			+ player.getName()
+																			+ ChatColor.GREEN
+																			+ " Has started a drop party! at:");
+															playerpicked
+																	.sendMessage(ChatColor.AQUA
+																			+ "X "
+																			+ ChatColor.LIGHT_PURPLE
+																			+ block.getLocation()
+																					.getBlockX()
+																			+ ChatColor.GRAY
+																			+ ", "
+																			+ ChatColor.AQUA
+																			+ "Y "
+																			+ ChatColor.LIGHT_PURPLE
+																			+ block.getLocation()
+																					.getBlockY()
+																			+ ChatColor.GRAY
+																			+ ", "
+																			+ ChatColor.AQUA
+																			+ "Z "
+																			+ ChatColor.LIGHT_PURPLE
+																			+ block.getLocation()
+																					.getBlockZ());
+
+															playerpicked.sendMessage(ChatColor.GOLD+ "60 Secound timer started!");
+														}
+													}
+												}
+											}
+										}
+									}
+
+									test01++;
+
+								}
+								
+								if (sign.getLine(0).contains("[H]")) {
+									colourfireworksBlockListener.startDropParty(player, true);
+								}
+								
+								if (sign.getLine(0).contains("[V]")) {
+									colourfireworksBlockListener.startDropParty(player, false);
+								}
+
+								colourfireworks.BlockSignOn.clear();
+								
+								colourfireworks.BlockSignOn.put("ID", sign.getBlock().getLocation().add(0, -1, 0).getBlock().getTypeId());
+								colourfireworks.BlockSignOn.put("SUBID", (int) sign.getBlock().getLocation().add(0, -1, 0).getBlock().getData());
+								
+								sign.getBlock().getLocation().add(0, -1, 0).getBlock().setType(Material.BEDROCK);
+								
+								colourfireworks.HowManyItemsInTotal.clear();
+								colourfireworks.HowManySlotItems.clear();
+								colourfireworks.WhatIsSlotItemsID.clear();
+								colourfireworks.WhatIsSlotItemsSUBID.clear();
+								colourfireworks.Max.put("insofar", 0);
+
+
+							} else {
+								player.sendMessage(ChatColor.RED
+										+ "Alreadly a drop party in progress!");
+							}
+						} else {
+							player.sendMessage(ChatColor.RED
+									+ "An error occured! No Drop Party currently active!");
+							
+							if (block.getLocation().add(0,-1,0).getBlock().getType() == Material.BEDROCK) {
+								block.getLocation().add(0,-1,0).getBlock().setType(Material.DIRT);
+							}
+							
+							block.setType(Material.AIR);
+						}
+						
+
 
 					}
 				}
@@ -1484,10 +1632,12 @@ public class colourfireworksPlayerListener implements Listener {
 																			+ custx
 																			+ ".fireticks"));
 															
-															colourfireworks.econ.depositPlayer(
-																	player.getName(), -price);
+															
+															colourfireworks.econ.withdrawPlayer(
+																	player.getName(), price);
 															double newecon = colourfireworks.econ
 																	.getBalance(player.getName());
+															
 															player.sendMessage(ChatColor.GOLD
 																	+ "That Cost you "
 																	+ ChatColor.LIGHT_PURPLE + price
@@ -1531,8 +1681,8 @@ public class colourfireworksPlayerListener implements Listener {
 												fireworkheight, rand, 501,
 												false);
 
-										colourfireworks.econ.depositPlayer(
-												player.getName(), -cost);
+										colourfireworks.econ.withdrawPlayer(
+												player.getName(), cost);
 										double newecon = colourfireworks.econ
 												.getBalance(player.getName());
 										player.sendMessage(ChatColor.GOLD
@@ -1573,8 +1723,8 @@ public class colourfireworksPlayerListener implements Listener {
 												expfireworkheight, rand, 502,
 												false);
 
-										colourfireworks.econ.depositPlayer(
-												player.getName(), -cost);
+										colourfireworks.econ.withdrawPlayer(
+												player.getName(), cost);
 										double newecon = colourfireworks.econ
 												.getBalance(player.getName());
 										player.sendMessage(ChatColor.GOLD
@@ -1615,8 +1765,8 @@ public class colourfireworksPlayerListener implements Listener {
 												fireworkheight, rand, 503,
 												false);
 
-										colourfireworks.econ.depositPlayer(
-												player.getName(), -cost);
+										colourfireworks.econ.withdrawPlayer(
+												player.getName(), cost);
 										double newecon = colourfireworks.econ
 												.getBalance(player.getName());
 										player.sendMessage(ChatColor.GOLD
@@ -1805,8 +1955,8 @@ public class colourfireworksPlayerListener implements Listener {
 													fireworkheight, rand,
 													fireticks, false);
 
-											colourfireworks.econ.depositPlayer(
-													player.getName(), -cost);
+											colourfireworks.econ.withdrawPlayer(
+													player.getName(), cost);
 											double newecon = colourfireworks.econ
 													.getBalance(player
 															.getName());

@@ -41,8 +41,8 @@ public class ReloadCommand {
 		int iteminhandcheck;
 		iteminhandcheck = plugin.getConfig().getInt("Fireworks.ItemIdNeededInHand");
 		
-		if (iteminhandcheck > 385) {					
-			if (iteminhandcheck < 2266) {
+		if (iteminhandcheck > 388) {					
+			if (iteminhandcheck < 2256) {
 				System.out.println("[ColourFireWorks] Error, Item needed in hand is not reconised, set to default");
 				player.sendMessage(ChatColor.GREEN + "[" + ChatColor.GOLD + "ColourFireWorks" + ChatColor.GREEN + "] " + ChatColor.RED + "Error, Item needed in hand is not reconised, set to default");
 				plugin.getConfig().set("Fireworks.ItemIdNeededInHand", 288);
@@ -50,7 +50,7 @@ public class ReloadCommand {
 			
 		}
 		
-		if (iteminhandcheck > 124) {					
+		if (iteminhandcheck > 133) {					
 			if (iteminhandcheck < 256) {
 				System.out.println("[ColourFireWorks] Error, Item needed in hand is not reconised, set to default");
 				player.sendMessage(ChatColor.GREEN + "[" + ChatColor.GOLD + "ColourFireWorks" + ChatColor.GREEN + "] " + ChatColor.RED + "Error, Item needed in hand is not reconised, set to default");
@@ -1242,7 +1242,7 @@ public class ReloadCommand {
 				
 
 				
-				if (itemid > 385) {					
+				if (itemid > 388) {					
 					if (itemid < 2256) {
 						System.out.println("[ColourFireWorks] Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
 						player.sendMessage(ChatColor.GREEN + "[" + ChatColor.GOLD + "ColourFireWorks" + ChatColor.GREEN + "] " + ChatColor.RED + "Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
@@ -1251,7 +1251,7 @@ public class ReloadCommand {
 					
 				}
 				
-				if (itemid > 122) {					
+				if (itemid > 133) {					
 					if (itemid < 256) {
 						System.out.println("[ColourFireWorks] Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
 						player.sendMessage(ChatColor.GREEN + "[" + ChatColor.GOLD + "ColourFireWorks" + ChatColor.GREEN + "] " + ChatColor.RED + "Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
@@ -1266,7 +1266,7 @@ public class ReloadCommand {
 					correct54 = 1;
 				}
 				
-				if (itemid > 2256) {
+				if (itemid > 2266) {
 					System.out.println("[ColourFireWorks] Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
 					player.sendMessage(ChatColor.GREEN + "[" + ChatColor.GOLD + "ColourFireWorks" + ChatColor.GREEN + "] " + ChatColor.RED + "Error, Item not reconised, CustomFireWork" + cf3 + ", Item " + idnumber2);
 					correct54 = 1;

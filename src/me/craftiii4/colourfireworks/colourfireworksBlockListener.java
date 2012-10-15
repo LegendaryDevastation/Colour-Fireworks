@@ -9,12 +9,11 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -65,6 +64,7 @@ public class colourfireworksBlockListener implements Listener {
 	
 	@EventHandler
 	public void onBlockRedstoneChange(BlockRedstoneEvent e) {
+
 		Block block = e.getBlock();
 		// Get what blocks are being changed
 		doFireWork(block.getRelative(1, 0, 0));
@@ -77,8 +77,7 @@ public class colourfireworksBlockListener implements Listener {
 	public void doFireWork(Block block) {
 		if (block.isBlockIndirectlyPowered() == false) {
 			Block newBlock = block;
-			
-			
+
 			if (block.getTypeId() == Material.SIGN.getId()
 					|| (block.getTypeId() == Material.SIGN_POST.getId())) {
 				Sign signwhite = (Sign) newBlock.getState();
@@ -86,7 +85,7 @@ public class colourfireworksBlockListener implements Listener {
 					if (signwhite.getLine(1).equalsIgnoreCase("[FireWork]")) {
 						Double fireworkheight;
 						fireworkheight = plugin.getConfig().getDouble(
-								"Fireworks.Wool.Height");
+								"Fireworks.Dye.Height");
 						Double expfireworkheight;
 						expfireworkheight = plugin.getConfig().getDouble(
 								"Fireworks.Exp.Height");
@@ -96,17 +95,27 @@ public class colourfireworksBlockListener implements Listener {
 						Double fireworksnowheight;
 						fireworksnowheight = plugin.getConfig().getDouble(
 								"Fireworks.Snow.Height");
-						
+
 						if (block.isBlockPowered() == false) {
 							if (signwhite.getLine(2)
 									.equalsIgnoreCase("[White]")) {
 								if (whiteon == 0) {
 									if (block.isBlockPowered() == false) {
 										whiteon = 1;
-										TNTPrimed whitefirework = (TNTPrimed) block
-												.getLocation()
-												.getWorld()
-												.spawn(block.getLocation(),
+										Location newlocation = block
+												.getLocation();
+
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);;
+										}
+										 
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 10);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 2);
+
+
+										TNTPrimed whitefirework = (TNTPrimed) newlocation
+												.getWorld().spawn(newlocation,
 														TNTPrimed.class);
 										whitefirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -124,10 +133,19 @@ public class colourfireworksBlockListener implements Listener {
 								if (orangeon == 0) {
 									if (block.isBlockPowered() == false) {
 										orangeon = 1;
-										TNTPrimed orangefirework = (TNTPrimed) block
-												.getLocation()
-												.getWorld()
-												.spawn(block.getLocation(),
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 3);
+											
+										TNTPrimed orangefirework = (TNTPrimed) newlocation
+												.getWorld().spawn(newlocation,
 														TNTPrimed.class);
 										orangefirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -146,10 +164,21 @@ public class colourfireworksBlockListener implements Listener {
 								if (magentaon == 0) {
 									if (block.isBlockPowered() == false) {
 										magentaon = 1;
-										TNTPrimed magentafirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 1);
+										
+										
+										TNTPrimed magentafirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										magentafirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -168,10 +197,21 @@ public class colourfireworksBlockListener implements Listener {
 								if (lightblueon == 0) {
 									if (block.isBlockPowered() == false) {
 										lightblueon = 1;
-										TNTPrimed lightbluefirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 2);
+										
+										
+										TNTPrimed lightbluefirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										lightbluefirework
 												.setVelocity(new Vector(
@@ -191,10 +231,21 @@ public class colourfireworksBlockListener implements Listener {
 								if (yellowon == 0) {
 									if (block.isBlockPowered() == false) {
 										yellowon = 1;
-										TNTPrimed yellowfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 3);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 10);
+										
+										TNTPrimed yellowfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										yellowfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -211,10 +262,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (limeon == 0) {
 									if (block.isBlockPowered() == false) {
 										limeon = 1;
-										TNTPrimed limefirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 4);
+										
+										TNTPrimed limefirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										limefirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -231,10 +292,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (pinkon == 0) {
 									if (block.isBlockPowered() == false) {
 										pinkon = 1;
-										TNTPrimed pinkfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 1);
+										
+										TNTPrimed pinkfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										pinkfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -251,10 +322,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (greyon == 0) {
 									if (block.isBlockPowered() == false) {
 										greyon = 1;
-										TNTPrimed greyfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 8);
+										
+										TNTPrimed greyfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										greyfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -272,10 +353,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (silveron == 0) {
 									if (block.isBlockPowered() == false) {
 										silveron = 1;
-										TNTPrimed silverfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 10);
+										
+										TNTPrimed silverfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										silverfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -292,10 +383,21 @@ public class colourfireworksBlockListener implements Listener {
 								if (cyanon == 0) {
 									if (block.isBlockPowered() == false) {
 										cyanon = 1;
-										TNTPrimed cyanfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 6);
+										
+										
+										TNTPrimed cyanfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										cyanfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -313,10 +415,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (purpleon == 0) {
 									if (block.isBlockPowered() == false) {
 										purpleon = 1;
-										TNTPrimed purplefirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 9);
+										
+										TNTPrimed purplefirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										purplefirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -333,10 +445,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (blueon == 0) {
 									if (block.isBlockPowered() == false) {
 										blueon = 1;
-										TNTPrimed bluefirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 7);
+										
+										TNTPrimed bluefirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										bluefirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -354,10 +476,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (brownon == 0) {
 									if (block.isBlockPowered() == false) {
 										brownon = 1;
-										TNTPrimed brownfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 12);
+										
+										TNTPrimed brownfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										brownfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -375,10 +507,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (greenon == 0) {
 									if (block.isBlockPowered() == false) {
 										greenon = 1;
-										TNTPrimed greenfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 4);
+										
+										TNTPrimed greenfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										greenfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -395,10 +537,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (redon == 0) {
 									if (block.isBlockPowered() == false) {
 										redon = 1;
-										TNTPrimed redfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 5);
+										
+										TNTPrimed redfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										redfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -416,10 +568,20 @@ public class colourfireworksBlockListener implements Listener {
 								if (blackon == 0) {
 									if (block.isBlockPowered() == false) {
 										blackon = 1;
-										TNTPrimed blackfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+										}
+
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 12);
+										
+										TNTPrimed blackfirework = (TNTPrimed)newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										blackfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -437,10 +599,24 @@ public class colourfireworksBlockListener implements Listener {
 								if (pumpkinon == 0) {
 									if (block.isBlockPowered() == false) {
 										pumpkinon = 1;
-										TNTPrimed pumpkinfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+											
+											
+										}
+										 
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 3);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 10);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 2);
+										
+										TNTPrimed pumpkinfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										pumpkinfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -458,10 +634,25 @@ public class colourfireworksBlockListener implements Listener {
 								if (snowon == 0) {
 									if (block.isBlockPowered() == false) {
 										snowon = 1;
-										TNTPrimed blackfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+											
+											
+										}
+										 
+										 
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 7);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 1);
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 4);
+										
+										TNTPrimed blackfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										blackfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -474,15 +665,26 @@ public class colourfireworksBlockListener implements Listener {
 								}
 								snowon = 0;
 							}
-							if (signwhite.getLine(2).equalsIgnoreCase(
-									"[Exp]")) {
+							if (signwhite.getLine(2).equalsIgnoreCase("[Exp]")) {
 								if (expon == 0) {
 									if (block.isBlockPowered() == false) {
 										expon = 1;
-										TNTPrimed blackfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+											
+											
+										}
+										 
+										Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.POTION_BREAK, 4);
+										
+										TNTPrimed blackfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
 										blackfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
@@ -497,28 +699,49 @@ public class colourfireworksBlockListener implements Listener {
 							}
 							int firen;
 							firen = 1;
-							while (plugin.customConfig.contains("Custom.Firework" + firen) == true) {
-								
+							while (plugin.customConfig
+									.contains("Custom.Firework" + firen) == true) {
+
 								if (signwhite.getLine(2).contains(
 										"[Custom" + firen + "]")) {
 									if (block.isBlockPowered() == false) {
-										TNTPrimed custfirework = (TNTPrimed) block
-												.getLocation()
+										
+										Location newlocation = block
+												.getLocation();
+										
+										 while (newlocation.add(0, 1, 0).getBlock().getType() == Material.FENCE) {
+											Bukkit.getWorld(newlocation.getWorld().getName()).playEffect(newlocation, Effect.SMOKE, 5);
+											newlocation.add(0, 1, 0);
+											
+											
+										}
+										 
+										
+											Double fireworkcustomheight;
+											fireworkcustomheight = plugin
+													.getCustomConfig().getDouble(
+															"Custom.Firework"
+																	+ firen
+																	+ ".Height");
+										
+										
+										TNTPrimed custfirework = (TNTPrimed) newlocation
 												.getWorld()
-												.spawn(block.getLocation(),
+												.spawn(newlocation,
 														TNTPrimed.class);
-										
-										Double fireworkcustomheight;
-										fireworkcustomheight = plugin.getCustomConfig().getDouble(
-												"Custom.Firework" + firen + ".Height");
-										
-										
+
+
+
 										custfirework.setVelocity(new Vector(
 												(rand.nextFloat() - 0.5f) / 3,
 												fireworkcustomheight,
 												(rand.nextFloat() - 0.5f) / 3));
 										custfirework.setFuseTicks(35);
-										custfirework.setFireTicks(plugin.customConfig.getInt("Custom.Firework" + firen + ".fireticks"));
+										custfirework
+												.setFireTicks(plugin.customConfig
+														.getInt("Custom.Firework"
+																+ firen
+																+ ".fireticks"));
 									}
 
 								}
@@ -533,627 +756,1151 @@ public class colourfireworksBlockListener implements Listener {
 
 		}
 	}
-
 	
+
+	public static int maxtime = 300;
 	public static int time = 60;
+	static boolean run = false;
+	
 	static int round1;
-	public static void startDropParty(final Player player) {
+	public static void startDropParty(final Player player, boolean hideitems) {
+		run = false;
+		
 		round1 = plugin.getServer().getScheduler()
 				.scheduleAsyncRepeatingTask(plugin, new Runnable() {
 					public void run() {
-						
-						if (time > 300) {
-							time = 300;
+
+						if (run == false) {
+							time = plugin.getdroppartyConfig().getInt(
+									"DropParty.Time.StartingTime");
+							maxtime = plugin.getdroppartyConfig().getInt(
+									"DropParty.Time.MaxTime");
+							run = true;
 						}
-						
+
+						if (time > maxtime) {
+
+							time = maxtime;
+
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.RED
+																		+ "Max Time Reached!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
+						if (time == 900) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "15 minutes left!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
+						if (time == 600) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "10 minutes left!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
+						if (time == 480) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "8 minutes left!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
+						if (time == 420) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "7 minutes left!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
+						if (time == 360) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
+
+							int test01 = 0;
+							int test02 = playersinworld.size();
+
+							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
+
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "6 minutes left!");
+													}
+												}
+											}
+										}
+									}
+								}
+
+								test01++;
+
+							}
+
+						}
+
 						if (time == 300) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "5 minutes left! - " + ChatColor.RED + "Max!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "5 minutes left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
-						
+
 						if (time == 240) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "4 minutes left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "4 minutes left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
-						
+
 						if (time == 180) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "3 minutes left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "3 minutes left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
-						
+
 						if (time == 120) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "2 minutes left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "2 minutes left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
-						
+
 						if (time == 90) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "90 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "90 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
 						}
-						
+
 						if (time == 75) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "75 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "75 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
-						
-						if (time == 60) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+						if (time == 60) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "60 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "60 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
-							
+
 						}
 
 						if (time == 45) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "45 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "45 seconds left");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
-						if (time == 30) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+						// if (time == 45) {
+						// int radius = plugin.getdroppartyConfig().getInt(
+						// "DropParty.Message.Radius");
+						// Block block = location.getBlock();
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+						// Entity chicken = block.getWorld().spawnCreature(
+						// block.getLocation(), EntityType.CHICKEN);
+
+						// int limit = 0;
+						// while (chicken == null && limit < 5) {
+						// chicken = block.getWorld()
+						// .spawnCreature(block.getLocation(),
+						// EntityType.CHICKEN);
+						// limit++;
+						// }
+
+						// if (chicken == null) {
+						// System.out
+						// .println("[ColourFireworks] Error Occured, Error code = TIME045_CHICKEN_NULL");
+						// return;
+						// }
+
+						// List<Entity> list = chicken.getNearbyEntities(
+						// radius, radius, radius);
+						// chicken.remove();
+
+						// int test01 = 0;
+						// int test02 = list.size();
+
+						// while (test02 > test01) {
+
+						// Entity entity = list.get(test01);
+						// if (entity instanceof Player) {
+						// ((Player) entity)
+						// .getPlayer()
+						// .sendMessage(
+						// ChatColor.GOLD
+						// + "45 seconds left!");
+
+						// }
+
+						// test01++;
+						// }
+
+						// }
+
+						if (time == 30) {
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "30 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "30 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 15) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "15 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "15 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 10) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD
-													+ "10 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "10 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 5) {
-							
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
-							
-							block.getWorld().setStorm(false);
-							block.getWorld().setWeatherDuration(0);
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							String wname = colourfireworks.dpworld.get("World");
+
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity)
-											.getPlayer()
-											.sendMessage(
-													ChatColor.GOLD
-															+ "5 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "5 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 						if (time == 4) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity)
-											.getPlayer()
-											.sendMessage(
-													ChatColor.GOLD
-															+ "4 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "4 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 3) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity)
-											.getPlayer()
-											.sendMessage(
-													ChatColor.GOLD
-															+ "3 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "3 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 2) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity)
-											.getPlayer()
-											.sendMessage(
-													ChatColor.GOLD
-															+ "2 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "2 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
 
 						if (time == 1) {
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							Block block = location.getBlock();
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
+
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity)
-											.getPlayer()
-											.sendMessage(
-													ChatColor.GOLD
-															+ "1 Secounds left!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "1 seconds left!");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
+
 							}
 
 						}
@@ -1161,47 +1908,68 @@ public class colourfireworksBlockListener implements Listener {
 						if (time == 0) {
 							Block block = location.getBlock();
 
-							int radius = plugin.getdroppartyConfig().getInt(
-									"DropParty.Message.Radius");
-							
+							String wname = colourfireworks.dpworld.get("World");
 
-							Entity chicken = block.getWorld().spawnCreature(
-									block.getLocation(), EntityType.CHICKEN);
-							
-							int limit = 0;
-							while (chicken == null && limit < 5){
-								chicken = block.getWorld().spawnCreature(
-										block.getLocation(), EntityType.CHICKEN);
-								limit++;
-							}
-							
-							List<Entity> list = chicken.getNearbyEntities(
-									radius, radius, radius);
-							chicken.remove();
-							
+							double maxx = colourfireworks.MaxandMin.get("MaxX");
+							double minx = colourfireworks.MaxandMin.get("MinX");
 
+							double maxy = colourfireworks.MaxandMin.get("MaxY");
+							double miny = colourfireworks.MaxandMin.get("MinY");
+
+							double maxz = colourfireworks.MaxandMin.get("MaxZ");
+							double minz = colourfireworks.MaxandMin.get("MinZ");
+
+							List<Player> playersinworld = Bukkit
+									.getWorld(wname).getPlayers();
 
 							int test01 = 0;
-							int test02 = list.size();
+							int test02 = playersinworld.size();
 
 							while (test02 > test01) {
+								Player playerpicked = playersinworld
+										.get(test01);
 
-								Entity entity = list.get(test01);
-								if (entity instanceof Player) {
-									((Player) entity).getPlayer().sendMessage(
-											ChatColor.GOLD + "Drop Party Going up!");
-
+								if (playerpicked.getLocation().getBlockX() < maxx) {
+									if (playerpicked.getLocation().getBlockX() > minx) {
+										if (playerpicked.getLocation()
+												.getBlockY() < maxy) {
+											if (playerpicked.getLocation()
+													.getBlockY() > miny) {
+												if (playerpicked.getLocation()
+														.getBlockZ() < maxz) {
+													if (playerpicked
+															.getLocation()
+															.getBlockZ() > minz) {
+														playerpicked
+																.sendMessage(ChatColor.GOLD
+																		+ "Drop party going up");
+													}
+												}
+											}
+										}
+									}
 								}
 
 								test01++;
 							}
+
+							int bedid = colourfireworks.BlockSignOn.get("ID");
+							int bedsubid = colourfireworks.BlockSignOn
+									.get("SUBID");
+
+							location.getBlock().getLocation().add(0, -1, 0)
+									.getBlock().setTypeId(bedid);
+							location.getBlock().getLocation().add(0, -1, 0)
+									.getBlock().setData((byte) bedsubid);
+
 							if (block.getState() instanceof Sign) {
 
+								Sign sign = (Sign) block.getState();
 
 								Double fireworkheight;
 
 								fireworkheight = plugin.getConfig().getDouble(
-										"Fireworks.Height");
+										"Fireworks.Dye.Height");
 
 								TNTPrimed firework = block
 										.getLocation()
@@ -1215,33 +1983,57 @@ public class colourfireworksBlockListener implements Listener {
 										(rand2.nextFloat() - 0.5f) / 3));
 								// Set the fuse ticks of the TNT to 35
 								firework.setFuseTicks(35);
-								// Set the fire ticks to 101, this also allows
+								// Set the fire ticks to 101, this also
+								// allows
 								// the
-								// listeners to detect which fire work went off
+								// listeners to detect which fire work went
+								// off
 								firework.setFireTicks(72);
 
-								block.setTypeId(0);
-
+								if (sign.getLine(0).contains("[A]")) {
+									// keep there
+								} else {
+									block.setTypeId(0);
+								}
 
 							} else {
-								while (test02 > test01) {
+								System.out
+										.println("[ColourFireworks] Error Occured - Sign no Longer exists!");
+								plugin.getServer()
+										.broadcastMessage(
+												ChatColor.RED
+														+ "Error, The sign did not exist for the drop party - Running anyways");
 
-									Entity entity = list.get(test01);
-									if (entity instanceof Player) {
-										((Player) entity).getPlayer().sendMessage(
-												ChatColor.GOLD + "Drop party cancled! - Sign was forced removed, world edit?");
+								Double fireworkheight;
 
-									}
+								fireworkheight = plugin.getConfig().getDouble(
+										"Fireworks.Dye.Height");
 
-									test01++;
-								}
+								TNTPrimed firework = block
+										.getLocation()
+										.getWorld()
+										.spawn(block.getLocation(),
+												TNTPrimed.class);
+								// Shoot the TNT up into the air
+								firework.setVelocity(new Vector((rand2
+										.nextFloat() - 0.5f) / 3,
+										fireworkheight,
+										(rand2.nextFloat() - 0.5f) / 3));
+								// Set the fuse ticks of the TNT to 35
+								firework.setFuseTicks(35);
+								// Set the fire ticks to 101, this also
+								// allows
+								// the
+								// listeners to detect which fire work went
+								// off
+								firework.setFireTicks(72);
+
 							}
 
 							stopDropParty();
-							
 
 						}
-						
+
 						if (time <= 0) {
 							time = 1;
 						}
@@ -1260,27 +2052,41 @@ public class colourfireworksBlockListener implements Listener {
 		Bukkit.getScheduler().cancelTask(round1);
 		time = 60;
 		location = null;
-		colourfireworks.allreadyone.clear();
 	}
 	
 	public static void stopDropPartycomplete() {
 		plugin.getServer().getScheduler().cancelTask(round1);
 		Bukkit.getScheduler().cancelTask(round1);
 		time = 60;
-		location = null;
+
 		colourfireworks.allreadyone.clear();
 		colourfireworks.HowManyItemsInTotal.clear();
 		colourfireworks.HowManySlotItems.clear();
 		colourfireworks.WhatIsSlotItemsID.clear();
 		colourfireworks.WhatIsSlotItemsSUBID.clear();
 		colourfireworks.Max.put("insofar", 0);
+		colourfireworks.Hide.clear();
+		
+		Block sourceblock = Bukkit.getWorld(location.getWorld().getName()).getBlockAt(location);
+		sourceblock.setType(Material.AIR);
+		
+		int bedid = colourfireworks.BlockSignOn.get("ID");
+		int bedsubid = colourfireworks.BlockSignOn.get("SUBID");
+		
+		sourceblock.getLocation().add(0, -1, 0).getBlock().setTypeId(bedid);
+		sourceblock.getLocation().add(0, -1, 0).getBlock().setData((byte) bedsubid);
+		
+		colourfireworks.BlockSignOn.clear();
+		
+		location = null;
+		
 	}
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
-		
+
 		if (block.getState() instanceof Sign) {
 			Sign sign = (Sign) block.getState();
 
@@ -1292,26 +2098,48 @@ public class colourfireworksBlockListener implements Listener {
 				if (colourfireworksBlockListener.location != null) {
 
 					if (placeofsign.toString().equals(
-							colourfireworksBlockListener.location
-									.toString())) {
-						
+							colourfireworksBlockListener.location.toString())) {
+
 						event.setCancelled(true);
-						player.sendMessage(ChatColor.RED + "Can not remove that DP sign!");
+						player.sendMessage(ChatColor.RED
+								+ "Can not remove that DP sign!");
+						
+						String line1 = sign.getLine(0).toUpperCase();
+
+						String finalline = "";
+						
+						if (line1.contains("A")) {
+							finalline = finalline + "[A]";
+						} else {
+							if (line1.contains("O")) {
+								finalline = finalline + "[O]";
+							} 
+						}
+
+
+						if (line1.contains("H")) {
+							finalline = finalline + "[H]";
+						} else {
+							if (line1.contains("V")) {
+								finalline = finalline + "[V]";
+							} 
+						}
 						sign.setLine(1, ChatColor.GOLD + "[Drop Party!]");
-						sign.setLine(2, ChatColor.GREEN +  "L = 6 | R = 1");
+						sign.setLine(2, ChatColor.GREEN + "L = 1 | R = 8");
+						sign.setLine(3, "");
 						sign.update();
-						
-						
+
 					}
 				}
 			}
 		}
-		
+
 	}
 
 
 	@EventHandler
 	public void onSignChange(SignChangeEvent event) {
+
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		ItemStack sign = new ItemStack(Material.SIGN, 1);
@@ -1319,125 +2147,363 @@ public class colourfireworksBlockListener implements Listener {
 		int signcorrect;
 
 		signcorrect = 0;
-		
+
 		if (event.getLine(1).equalsIgnoreCase("[DP]")
-				|| (event.getLine(1).equalsIgnoreCase("[D P]")|| (event.getLine(1).contains("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[Drop Party]")|| (event.getLine(1).equalsIgnoreCase("[DropParty]")))))) {
-			if (player.hasPermission("colourfireworks.dropparty.create") || player
-							.isOp()) {
-				
-				event.setLine(1, ChatColor.GOLD + "[Drop Party!]");
-				event.setLine(2, ChatColor.GREEN +  "L = 6 | R = 1");
-				
-				if (!colourfireworks.allreadyone.containsKey("On")) {
-					Sign sign2 = (Sign) block.getState();
-					Location placeofchest = sign2.getLocation();
-					
-					if (player.hasPermission("colourfireworks.notifyupdate")
-							|| player.isOp()) {
-						
-						if (colourfireworks.latestversion == false) {
-							String latestversion = URLReader.latestversion;
-							player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
-									+ "ColourFireWorks" + ChatColor.AQUA + "]"
-									+ ChatColor.RED + " Version " + ChatColor.LIGHT_PURPLE +  latestversion
-									+ ChatColor.RED + " is out!");
-							player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GOLD
-									+ "ColourFireWorks" + ChatColor.AQUA + "]"
-									+ ChatColor.RED + " Currently using version " + ChatColor.LIGHT_PURPLE +  plugin.getDescription().getVersion());
-						}
+				|| (event.getLine(1).equalsIgnoreCase("[D P]") || (event
+						.getLine(1).contains("[Drop Party]") || (event.getLine(
+						1).equalsIgnoreCase("[Drop Party]") || (event
+						.getLine(1).equalsIgnoreCase("[DropParty]")))))) {
+			if (player.hasPermission("colourfireworks.dropparty.create")
+					|| player.isOp()) {
 
+				// if (event.getLine(0).equalsIgnoreCase("[A]") ||
+				// event.getLine(0).equalsIgnoreCase("[Auto]")) {
+				// event.setLine(0, ChatColor.LIGHT_PURPLE + "[Auto][Hidden]");
+				// } else {
+				// event.setLine(0, "");
+				// }
+
+				boolean firstlinecorrect = true;
+
+				boolean hide = true;
+
+				String line1 = event.getLine(0).toUpperCase();
+
+				String finalline = "";
+
+				if (line1.contains("A")) {
+					finalline = finalline + "[A]";
+				} else {
+					if (line1.contains("O")) {
+						finalline = finalline + "[O]";
+					} else {
+						firstlinecorrect = false;
 					}
+				}
 
-					player.sendMessage(ChatColor.GOLD
-							+ "DropParty Started");
-					
-					location = placeofchest;
-					
-					colourfireworks.allreadyone.put("On", true);
-					
-					int radius = plugin.getConfig().getInt("DropParty.Message.Radius");
-					Entity chicken = block.getWorld().spawnCreature(
-							block.getLocation(), EntityType.CHICKEN);
-					
-					if (chicken == null){
-						player.sendMessage(ChatColor.RED + "An Error occured, Please try again?"); 
-						stopDropParty();
+				if (line1.contains("A") && (line1.contains("O"))) {
+					firstlinecorrect = false;
+					player.sendMessage(ChatColor.RED
+							+ "1st Line can not contain both A and O");
+				}
+
+				if (line1.contains("H")) {
+					finalline = finalline + "[H]";
+					hide = true;
+				} else {
+					if (line1.contains("V")) {
+						finalline = finalline + "[V]";
+						hide = false;
+					} else {
+						firstlinecorrect = false;
 					}
-					
-					if (chicken == null)	
-					return;
-						
-					
+				}
 
-					
-					List<Entity> list = chicken.getNearbyEntities(radius,radius,radius);
-					chicken.remove();
-					
-					startDropParty(player);
+				if (line1.contains("H") && (line1.contains("V"))) {
+					firstlinecorrect = false;
+					player.sendMessage(ChatColor.RED
+							+ "1st Line can not contain both H and V");
+				}
 
-					int test01 = 0;
-					int test02 = list.size();
-					
-					colourfireworks.HowManyItemsInTotal.clear();
-					colourfireworks.HowManySlotItems.clear();
-					colourfireworks.WhatIsSlotItemsID.clear();
-					colourfireworks.WhatIsSlotItemsSUBID.clear();
-					colourfireworks.Max.put("insofar", 0);
-					
-					
+				// if (line1.contains("L")) {
+				// finalline = finalline + "[L]";
+				// usechicken = false;
+				// } else {
+				// if (line1.contains("C")) {
+				// finalline = finalline + "[C]";
+				// usechicken = true;
+				// } else {
+				// firstlinecorrect = false;
+				// }
+				// }
 
-					while (test02 > test01) {
+				// if (line1.contains("L") && (line1.contains("C"))) {
+				// firstlinecorrect = false;
+				// player.sendMessage(ChatColor.RED
+				// + "1st Line can not contain both L and C");
+				// }
 
-						Entity entity = list.get(test01);
-						if (entity instanceof Player) {
-							((Player) entity).getPlayer().sendMessage(
-									ChatColor.GOLD + player.getName()
-											+ ChatColor.GREEN
-											+ " Has started a drop party! at:");
-							((Player) entity).getPlayer().sendMessage(
-									ChatColor.AQUA + "X "
-											+ ChatColor.LIGHT_PURPLE
-											+ block.getLocation().getBlockX()
-											+ ChatColor.GRAY + ", "
-											+ ChatColor.AQUA + "Y "
-											+ ChatColor.LIGHT_PURPLE
-											+ block.getLocation().getBlockY()
-											+ ChatColor.GRAY + ", "
-											+ ChatColor.AQUA + "Z "
-											+ ChatColor.LIGHT_PURPLE
-											+ block.getLocation().getBlockZ());
-							((Player) entity).getPlayer().sendMessage(
-									ChatColor.GOLD
-											+ "60 Secound timer started!");
-							
-						}
+				if (firstlinecorrect == false) {
 
-						test01++;
-					}
+					block.setType(Material.AIR);
+					block.getWorld().dropItemNaturally(block.getLocation(),
+							sign);
+
+					player.sendMessage(ChatColor.RED
+							+ "First line must contain two variables");
+					player.sendMessage(ChatColor.GOLD + "1. "
+							+ ChatColor.LIGHT_PURPLE + "A" + ChatColor.GOLD
+							+ " = Auto - Drop party will repeat when clicked");
+					player.sendMessage(ChatColor.GOLD + "1. "
+							+ ChatColor.LIGHT_PURPLE + "O" + ChatColor.GOLD
+							+ " = Once - Drop party will go through once");
+
+					player.sendMessage(ChatColor.GREEN
+							+ "2. "
+							+ ChatColor.LIGHT_PURPLE
+							+ "H"
+							+ ChatColor.GREEN
+							+ " = Hidden - Items will appear to be the same untill picked up");
+					player.sendMessage(ChatColor.GREEN
+							+ "2. "
+							+ ChatColor.LIGHT_PURPLE
+							+ "V"
+							+ ChatColor.GREEN
+							+ " = Visible - Players can see what the items are before picking up");
+
+					// player.sendMessage(ChatColor.AQUA
+					// + "3. "
+					// + ChatColor.LIGHT_PURPLE
+					// + "L"
+					// + ChatColor.AQUA
+					// +
+					// " = List - Will get every player online and check their location");
+					// player.sendMessage(ChatColor.AQUA
+					// + "3. "
+					// + ChatColor.LIGHT_PURPLE
+					// + "C"
+					// + ChatColor.AQUA
+					// +
+					// " = Chicken - Will spawn a chicken to get players nearby");
 
 				} else {
-					player.sendMessage(ChatColor.RED
-							+ "Alreadly a drop party in progress!");
-					block.setType(Material.AIR);
-					block.getWorld().dropItemNaturally(block.getLocation(), sign);
+
+					event.setLine(0, finalline);
+					event.setLine(1, ChatColor.GOLD + "[Drop Party!]");
+					event.setLine(2, ChatColor.GREEN + "L = 1 | R = 8");
+					event.setLine(3, "");
+
+					if (!colourfireworks.allreadyone.containsKey("On")) {
+
+						Sign sign2 = (Sign) block.getState();
+						Location placeofchest = sign2.getLocation();
+
+						// if
+						// (player.hasPermission("colourfireworks.notifyupdate")
+						// || player.isOp()) {
+
+						// if (colourfireworks.latestversion == false) {
+						// String latestversion = URLReader.latestversion;
+						// player.sendMessage(ChatColor.AQUA + "[" +
+						// ChatColor.GOLD
+						// + "ColourFireWorks" + ChatColor.AQUA + "]"
+						// + ChatColor.RED + " Version " +
+						// ChatColor.LIGHT_PURPLE + latestversion
+						// + ChatColor.RED + " is out!");
+						// player.sendMessage(ChatColor.AQUA + "[" +
+						// ChatColor.GOLD
+						// + "ColourFireWorks" + ChatColor.AQUA + "]"
+						// + ChatColor.RED + " Currently using version " +
+						// ChatColor.LIGHT_PURPLE +
+						// plugin.getDescription().getVersion());
+						// }
+
+						// }
+
+						int radius = plugin.getdroppartyConfig().getInt(
+								"DropParty.Message.Radius");
+
+						colourfireworks.MaxandMin.clear();
+						colourfireworks.dpworld.clear();
+						
+						
+						colourfireworks.MaxandMin.put("MaxX", block
+								.getLocation().getBlockX() + radius);
+						
+						colourfireworks.MaxandMin.put("MinX", block
+								.getLocation().getBlockX() - radius);
+
+						colourfireworks.MaxandMin.put("MaxZ", block
+								.getLocation().getBlockZ() + radius);
+						colourfireworks.MaxandMin.put("MinZ", block
+								.getLocation().getBlockZ() - radius);
+
+						colourfireworks.MaxandMin.put("MaxY", block
+								.getLocation().getBlockY() + radius);
+						colourfireworks.MaxandMin.put("MinY", block
+								.getLocation().getBlockY() - radius);
+
+						colourfireworks.dpworld.put("World", block.getWorld()
+								.getName());
+
+						String wname = colourfireworks.dpworld.get("World");
+
+						double maxx = colourfireworks.MaxandMin.get("MaxX");
+						double minx = colourfireworks.MaxandMin.get("MinX");
+
+						double maxy = colourfireworks.MaxandMin.get("MaxY");
+						double miny = colourfireworks.MaxandMin.get("MinY");
+
+						double maxz = colourfireworks.MaxandMin.get("MaxZ");
+						double minz = colourfireworks.MaxandMin.get("MinZ");
+						
+						List<Player> playersinworld = Bukkit.getWorld(wname)
+								.getPlayers();
+
+						int test01 = 0;
+						int test02 = playersinworld.size();
+
+						while (test02 > test01) {
+							Player playerpicked = playersinworld.get(test01);
+							
+
+							if (playerpicked.getLocation().getBlockX() < maxx) {
+								if (playerpicked.getLocation().getBlockX() > minx) {
+									if (playerpicked.getLocation().getBlockY() < maxy) {
+										if (playerpicked.getLocation().getBlockY() > miny) {
+											if (playerpicked.getLocation()
+													.getBlockZ() < maxz) {
+												if (playerpicked.getLocation()
+														.getBlockZ() > minz) {
+													playerpicked
+															.sendMessage(ChatColor.GOLD
+																	+ player.getName()
+																	+ ChatColor.GREEN
+																	+ " Has started a drop party! at:");
+													playerpicked
+															.sendMessage(ChatColor.AQUA
+																	+ "X "
+																	+ ChatColor.LIGHT_PURPLE
+																	+ block.getLocation()
+																			.getBlockX()
+																	+ ChatColor.GRAY
+																	+ ", "
+																	+ ChatColor.AQUA
+																	+ "Y "
+																	+ ChatColor.LIGHT_PURPLE
+																	+ block.getLocation()
+																			.getBlockY()
+																	+ ChatColor.GRAY
+																	+ ", "
+																	+ ChatColor.AQUA
+																	+ "Z "
+																	+ ChatColor.LIGHT_PURPLE
+																	+ block.getLocation()
+																			.getBlockZ());
+
+													playerpicked.sendMessage(ChatColor.GOLD+ "60 Secound timer started!");
+												}
+											}
+										}
+									}
+								}
+							}
+
+							test01++;
+
+						}
+
+						player.sendMessage(ChatColor.GOLD + "DropParty Started");
+
+						location = placeofchest;
+
+						colourfireworks.allreadyone.put("On", true);
+
+						// Entity chicken = block.getWorld().spawnCreature(
+						// block.getLocation(), EntityType.CHICKEN);
+
+						// if (chicken == null) {
+						// System.out
+						// .println("[ColourFireWork LOG] - Chicken = null!");
+						// player.sendMessage(ChatColor.RED
+						// + "An Error occured, Please try again?");
+						// stopDropParty();
+						// }
+
+						// if (chicken == null)
+						// return;
+
+						// List<Entity> list = chicken.getNearbyEntities(radius,
+						// radius, radius);
+
+						// chicken.remove();
+						startDropParty(player, hide);
+
+						// int test01 = 0;
+						// int test02 = list.size();
+
+						colourfireworks.BlockSignOn.clear();
+
+						colourfireworks.BlockSignOn.put("ID", event.getBlock()
+								.getLocation().add(0, -1, 0).getBlock()
+								.getTypeId());
+						colourfireworks.BlockSignOn.put("SUBID", (int) event
+								.getBlock().getLocation().add(0, -1, 0)
+								.getBlock().getData());
+
+						event.getBlock().getLocation().add(0, -1, 0).getBlock()
+								.setType(Material.BEDROCK);
+
+						colourfireworks.HowManyItemsInTotal.clear();
+						colourfireworks.HowManySlotItems.clear();
+						colourfireworks.WhatIsSlotItemsID.clear();
+						colourfireworks.WhatIsSlotItemsSUBID.clear();
+						colourfireworks.Max.put("insofar", 0);
+
+						colourfireworks.Hide.put("hide", hide);
+
+						// while (test02 > test01) {
+						// Entity entity = list.get(test01);
+						// if (entity instanceof Player) {
+						// ((Player) entity)
+						// .getPlayer()
+						// .sendMessage(
+						// ChatColor.GOLD
+						// + player.getName()
+						// + ChatColor.GREEN
+						// + " Has started a drop party! at:");
+						// ((Player) entity).getPlayer().sendMessage(
+						// ChatColor.AQUA
+						// + "X "
+						// + ChatColor.LIGHT_PURPLE
+						// + block.getLocation()
+						// .getBlockX()
+						// + ChatColor.GRAY
+						// + ", "
+						// + ChatColor.AQUA
+						// + "Y "
+						// + ChatColor.LIGHT_PURPLE
+						// + block.getLocation()
+						// .getBlockY()
+						// + ChatColor.GRAY
+						// + ", "
+						// + ChatColor.AQUA
+						// + "Z "
+						// + ChatColor.LIGHT_PURPLE
+						// + block.getLocation()
+						// .getBlockZ());
+						// ((Player) entity).getPlayer().sendMessage(
+						// ChatColor.GOLD
+						// + "60 Secound timer started!");
+						//
+						// }
+						//
+						// test01++;
+						// }
+
+					} else {
+						player.sendMessage(ChatColor.RED
+								+ "Alreadly a drop party in progress!");
+						block.setType(Material.AIR);
+						block.getWorld().dropItemNaturally(block.getLocation(),
+								sign);
+					}
+
 				}
-				
-				
-				
+
 			} else {
 				block.setType(Material.AIR);
 				block.getWorld().dropItemNaturally(block.getLocation(), sign);
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to create a drop party sign!");
 			}
-			
-			
+
 		}
 
 		if (event.getLine(1).equalsIgnoreCase("[FireWork]")
 				|| (event.getLine(1).equalsIgnoreCase("[Fire Work]"))) {
-			if (player.hasPermission("colourfireworks.redstonesign.*") || player
-							.isOp()) {
+			if (player.hasPermission("colourfireworks.redstonesign.*")
+					|| player.isOp()) {
 				event.setLine(1, "[FireWork]");
 			} else {
 				block.setType(Material.AIR);
@@ -1445,7 +2511,8 @@ public class colourfireworksBlockListener implements Listener {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to create a firework sign!");
 			}
-			if (player.hasPermission("colourfireworks.redstonesign.*") || player.isOp()) {
+			if (player.hasPermission("colourfireworks.redstonesign.*")
+					|| player.isOp()) {
 				if (event.getLine(2).equalsIgnoreCase("[white]")
 						|| (event.getLine(2).equalsIgnoreCase("[35]"))
 						|| (event.getLine(1).equalsIgnoreCase("[35:1]"))) {
@@ -1597,10 +2664,10 @@ public class colourfireworksBlockListener implements Listener {
 				}
 
 				int custq = 1;
-				while (plugin.customConfig.contains(
-						"Custom.Firework" + custq + ".use") == true) {
-					if (plugin.customConfig.getBoolean(
-							"Custom.Firework" + custq + ".use") == true) {
+				while (plugin.customConfig.contains("Custom.Firework" + custq
+						+ ".use") == true) {
+					if (plugin.customConfig.getBoolean("Custom.Firework"
+							+ custq + ".use") == true) {
 						if (event.getLine(2).contains("[custom" + custq + "]")
 								|| (event.getLine(2).contains("[Custom" + custq
 										+ "]"))) {

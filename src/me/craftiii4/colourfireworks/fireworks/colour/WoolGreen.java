@@ -6,7 +6,9 @@ import me.craftiii4.colourfireworks.colourfireworks;
 
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -18,9 +20,36 @@ public class WoolGreen {
 			final Entity entity, Random rand, int dyeamount, int itemspread,
 			boolean pickup, boolean setonfire, boolean remove,
 			final boolean effect, int ticksuntillremove) {
+		
+		if (plugin.getConfig().getBoolean("Fireworks.Dye.PotionEffects")) {
+			
+		Entity e = entity;
+		World w = e.getWorld();
+		Location l = e.getLocation();
 
-		ItemStack greenloldyeitem = new ItemStack(Material.INK_SACK, 1,
-				(short) (15 - DyeColor.GREEN.getData()));
+
+		w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY() + 1, l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY() + 2, l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY() - 1, l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY() - 2, l.getZ()), Effect.POTION_BREAK, 4);
+		
+		w.playEffect(new Location(w, l.getX() + 1, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() + 2, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() - 1, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() - 2, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+		
+		w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() + 1), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() + 2), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() - 1), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() - 2), Effect.POTION_BREAK, 4);
+		
+		w.playEffect(new Location(w, l.getX() + 3, l.getY(), l.getZ() + 3), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() + 3, l.getY(), l.getZ() - 3), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() - 3, l.getY(), l.getZ() - 3), Effect.POTION_BREAK, 4);
+		w.playEffect(new Location(w, l.getX() - 3, l.getY(), l.getZ() + 3), Effect.POTION_BREAK, 4);
+		
+		}
 
 		int greenlol1;
 
@@ -31,6 +60,11 @@ public class WoolGreen {
 		greenlol = dyeamount;
 
 		while (greenlol > greenlol1) {
+			
+			final ItemStack greenloldyeitem = new ItemStack(Material.INK_SACK, 1,
+					(short) (15 - DyeColor.GREEN.getData()));
+			
+			final ItemStack cake = new ItemStack(Material.CAKE, 1);
 
 			double r1;
 			double r2;
@@ -59,12 +93,26 @@ public class WoolGreen {
 
 			final Item greenfire = entity.getWorld().dropItemNaturally(
 					entity.getLocation(), greenloldyeitem);
-
+			
+			greenfire.setItemStack(cake);
+			
 			if (pickup == false) {
 				greenfire.setTicksLived(999999999);
 			}
 
 			greenfire.setVelocity(new Vector(r1, r3, r2));
+			
+			plugin.getServer()
+			.getScheduler()
+			.scheduleSyncDelayedTask(plugin,
+					new Runnable() {
+
+						public void run() {
+
+							greenfire.setItemStack(greenloldyeitem);
+
+						}
+					}, 20);
 
 			if (remove == true) {
 

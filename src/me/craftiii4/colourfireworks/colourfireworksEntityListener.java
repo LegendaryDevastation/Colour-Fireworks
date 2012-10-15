@@ -28,6 +28,7 @@ import me.craftiii4.colourfireworks.fireworks.colour.WoolWhite;
 import me.craftiii4.colourfireworks.fireworks.colour.WoolYellow;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Blaze;
@@ -90,10 +91,16 @@ public class colourfireworksEntityListener implements Listener {
 		EntityAttack = null;
 	}
 	
-	// If an entity has exploded run
 
+	
+	// If an entity has exploded run
+	
+
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityExplode(EntityExplodeEvent event) {
+		
+		final ItemStack cake = new ItemStack(Material.CAKE, 1);
 
 
 		// Check to see if the explosion was due to TNT
@@ -598,10 +605,16 @@ public class colourfireworksEntityListener implements Listener {
 
 									}
 
-									Item customfire = block.getWorld()
+									final Item customfire = block.getWorld()
 											.dropItemNaturally(
 													block.getLocation(),
 													itemid2);
+									
+									customfire.setItemStack(cake);
+									
+									final ItemStack itemid2final = itemid2;
+									
+									
 									if (plugin.customConfig
 											.getBoolean("Custom.Firework"
 													+ custx + ".ItemsDroped.ID"
@@ -617,6 +630,20 @@ public class colourfireworksEntityListener implements Listener {
 													+ idnumber + ".SetAlight") == true) {
 										customfire.setFireTicks(300);
 									}
+									
+									plugin.getServer()
+									.getScheduler()
+									.scheduleSyncDelayedTask(plugin,
+											new Runnable() {
+
+												public void run() {
+
+													customfire.setItemStack(itemid2final);
+
+												}
+											}, 20);
+									
+									
 									item01 = (item01 + 1);
 								}
 								idnumber = idnumber + 1;
@@ -827,20 +854,52 @@ public class colourfireworksEntityListener implements Listener {
 					} else {
 
 						int howmany = 0;
+						
+						int itemspread = plugin.getdroppartyConfig().getInt("DropParty.ItemSpread.Spread");
+						int itemspread2 = plugin.getdroppartyConfig().getInt("DropParty.ItemSpread.SecondsReleasedOver");
+						
 						while (itemammount > howmany) {
+							
 							double r1;
 							double r2;
 							double r3;
+
+							int r01;
+							int r02;
+
+							r01 = itemspread;
+							r01 = (r01 * 2);
+
+							r02 = itemspread;
+
 							r1 = rand.nextDouble();
 							r2 = rand.nextDouble();
 							r3 = rand.nextDouble();
-							r1 = (r1 * 10) - 5;
+
+							r1 = (r1 * r01) - r02;
+							r2 = (r2 * r01) - r02;
+
 							r1 = (r1 / 10);
-							r2 = (r2 * 10) - 5;
 							r2 = (r2 / 10);
 
-							r3 = (r3 * 4) - 4;
-							r3 = (r3 / 10);
+							r3 = (r3 * itemspread2);
+							
+							
+							//double r1;
+							//double r2;
+							//double r3;
+							//r1 = rand.nextDouble();
+							//r2 = rand.nextDouble();
+							//r3 = rand.nextDouble();
+							//r1 = (r1 * 10) - 5;
+							//r1 = (r1 / 8);
+							//r2 = (r2 * 10) - 5;
+							//r2 = (r2 / 8);
+
+							//r3 = (r3 * 6) - 4;
+							//r3 = (r3 / 8);
+							
+							
 							ItemStack itemid2 = new ItemStack(itemid, 1);
 							itemid2.setDurability((short) itemidsub);
 							
@@ -946,17 +1005,46 @@ public class colourfireworksEntityListener implements Listener {
 								}
 								
 								}
-								
-								
-								
+					
 								enchant++;
 							}
 							
+							boolean hideon = colourfireworks.Hide.get("hide");
 							
-							block.getWorld()
+							final Item customdropfire;
+							
+							if (hideon == true) {
+								customdropfire = block.getWorld()
+										.dropItemNaturally(block.getLocation(),
+												cake);
+							}  else {
+							
+							customdropfire = block.getWorld()
 									.dropItemNaturally(block.getLocation(),
-											itemid2)
-									.setVelocity(new Vector(r1, r3, r2));
+											itemid2);
+							}
+							
+							
+							
+							final ItemStack dropitemid2final = itemid2;
+							
+							customdropfire.setItemStack(cake);	
+											
+							customdropfire.setVelocity(new Vector(r1, r3, r2));
+							
+							plugin.getServer()
+							.getScheduler()
+							.scheduleSyncDelayedTask(plugin,
+									new Runnable() {
+
+										public void run() {
+
+											customdropfire.setItemStack(dropitemid2final);
+											
+
+										}
+									}, 20);
+							
 							howmany++;
 
 						}
@@ -965,6 +1053,7 @@ public class colourfireworksEntityListener implements Listener {
 
 				}
 
+				colourfireworks.allreadyone.clear();
 				colourfireworks.HowManyItemsInTotal.clear();
 				colourfireworks.HowManySlotItems.clear();
 				colourfireworks.WhatIsSlotItemsID.clear();
@@ -1223,16 +1312,27 @@ public class colourfireworksEntityListener implements Listener {
 	
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
-		if (!(event instanceof EntityDamageByEntityEvent)
-				|| !(event.getEntity() instanceof Player)) {
-			EntityAttack = event.getCause().name();
-		}
-		if (event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent) {
-			EntityDamageByEntityEvent nEvent = (EntityDamageByEntityEvent) event
-					.getEntity().getLastDamageCause();
-			if ((nEvent.getDamager() instanceof TNTPrimed)) {
+			
+		
+		//if (!(event instanceof EntityDamageByEntityEvent)
+		//		|| !(event.getEntity() instanceof Player)) {
+		//	EntityAttack = event.getCause().name();
+		//}
+		
+		//if (event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent) {
+		
+		if (event instanceof EntityDamageByEntityEvent) {
+			
+			
+			EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent) event;
+			
+			
+			if (damageEvent.getDamager() instanceof TNTPrimed) {
+				
+				
 
-				if (nEvent.getDamager().getFireTicks() >= 72) {
+				if (damageEvent.getDamager().getFireTicks() >= 72) {
+					
 
 					if (event.getEntity() instanceof Player) {
 						if (plugin.getConfig().getBoolean(

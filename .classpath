@@ -6,10 +6,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Craftiii4/Desktop/Other Programs/MINECRAFT SERVER/1.2.4/server.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Craftiii4/Desktop/Other Programs/MINECRAFT SERVER/1.2.4/plugins/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Craftiii4/Desktop/Other Programs/MINECRAFT SERVER/1.2.4/plugins/worldguard-5.5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Craftiii4/Downloads/javamail1_4_5/javamail-1.4.5/lib/mailapi.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Craftiii4/Downloads/javamail1_4_5/javamail-1.4.5/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Craftiii4/Downloads/craftbukkit-1.3.2-R1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Craftiii4/Downloads/worldguard-5.5.4/WorldGuard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Craftiii4/Downloads/Vault.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

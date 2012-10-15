@@ -6,7 +6,9 @@ import me.craftiii4.colourfireworks.colourfireworks;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
@@ -72,6 +74,84 @@ public class FireworkExp {
 			final Entity entity, Random rand, int orbamount, int orbvalue,
 			int itemspread, boolean remove, final boolean effect,
 			int ticksuntillremove) {
+		
+		if (plugin.getConfig().getBoolean("Fireworks.Exp.PotionEffects")) {
+			
+			Entity e = entity;
+			World w = e.getWorld();
+			Location l = e.getLocation();
+
+
+			w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() + 1, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() + 2, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() - 1, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() - 2, l.getZ()), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX() + 1, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() + 2, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 1, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 2, l.getY(), l.getZ()), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() + 1), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() + 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() - 1), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY(), l.getZ() - 2), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX() + 3, l.getY(), l.getZ() + 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() + 3, l.getY(), l.getZ() - 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 3, l.getY(), l.getZ() - 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 3, l.getY(), l.getZ() + 3), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX() + 1, l.getY() - 4, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() + 2, l.getY() - 4, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 1, l.getY() - 4, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 2, l.getY() - 4, l.getZ()), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX(), l.getY() - 4, l.getZ() + 1), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() - 4, l.getZ() + 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() - 4, l.getZ() - 1), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX(), l.getY() - 4, l.getZ() - 2), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l.getX() + 3, l.getY() - 4, l.getZ() + 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() + 3, l.getY() - 4, l.getZ() - 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 3, l.getY() - 4, l.getZ() - 3), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l.getX() - 3, l.getY() - 4, l.getZ() + 3), Effect.POTION_BREAK, 4);
+			
+			
+			
+			Location l2 = e.getWorld().getHighestBlockAt(l).getLocation();
+			
+			w.playEffect(new Location(w, l2.getX(), l.getY() + 5, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX(), l.getY() + 4, l.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX(), l.getY() + 3, l.getZ()), Effect.POTION_BREAK, 4);
+			
+			
+			w.playEffect(new Location(w, l2.getX() - 2, l2.getY() + 4, l2.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() - 4, l2.getY() + 3, l2.getZ()), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX() + 2, l2.getY() + 4, l2.getZ()), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() + 4, l2.getY() + 3, l2.getZ()), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX() - 2, l2.getY() + 4, l2.getZ() - 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() - 4, l2.getY() + 3, l2.getZ() - 4), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX() - 2, l2.getY() + 4, l2.getZ() + 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() - 4, l2.getY() + 3, l2.getZ() + 4), Effect.POTION_BREAK, 4);
+
+			w.playEffect(new Location(w, l2.getX() + 2, l2.getY() + 4, l2.getZ() + 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() + 4, l2.getY() + 3, l2.getZ() + 4), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX() + 2, l2.getY() + 4, l2.getZ() - 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX() + 4, l2.getY() + 3, l2.getZ() - 4), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX(), l2.getY() + 4, l2.getZ() - 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX(), l2.getY() + 3, l2.getZ() - 4), Effect.POTION_BREAK, 4);
+			
+			w.playEffect(new Location(w, l2.getX(), l2.getY() + 4, l2.getZ() + 2), Effect.POTION_BREAK, 4);
+			w.playEffect(new Location(w, l2.getX(), l2.getY() + 3, l2.getZ() + 4), Effect.POTION_BREAK, 4);
+			
+			}
 
 		double exp;
 		exp = 0;
@@ -81,6 +161,10 @@ public class FireworkExp {
 		Math.round(exp1);
 
 		while (exp1 > exp) {
+			
+			
+
+			
 
 			double r1;
 			double r2;
@@ -113,6 +197,7 @@ public class FireworkExp {
 
 			final ExperienceOrb orb = entity.getWorld().spawn(
 					entity.getLocation(), ExperienceOrb.class);
+						
 			int exp2;
 			exp2 = orbvalue;
 			orb.setExperience(exp2);
